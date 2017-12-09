@@ -1,0 +1,8 @@
+{
+  "name": "scoolmobile",
+  "app_id": "4326a051",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
