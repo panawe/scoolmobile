@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { TabsPage } from '../pages/tabs/tabs';
+import { ConnexionPage } from '../pages/connexion/connexion';
+import { ProfilePage } from '../pages/profile/profile';
+import { ConfigurationPage } from '../pages/configuration/configuration'; 
+
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  @ViewChild(Nav) navCtrl: Nav;
+    rootPage:any = ConnexionPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -18,5 +22,15 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+  goToConnexion(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(ConnexionPage);
+  }goToProfile(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(ProfilePage);
+  }goToConfiguration(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(ConfigurationPage);
   }
 }

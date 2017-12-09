@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Connexion
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page6">
+  <form id="connexion-form1">
+    <ion-list id="connexion-list2">
+      <ion-item id="connexion-input1">
+        <ion-label>
+          Email
+        </ion-label>
+        <ion-input type="email" name="email" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+      <ion-item id="connexion-input2">
+        <ion-label>
+          Mot de passe
+        </ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="spacer" style="height:40px;" id="connexion-spacer1"></div>
+    <button id="connexion-button1" ion-button color="stable" block (click)="login()">
+      Connecter
+    </button>
+    <button ion-button color="danger" clear *ngIf="error">{{error}}</button>
+  </form>
+</ion-content>

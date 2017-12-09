@@ -1,1 +1,31 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="mainContent">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        ScoolDay
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content id="side-menu21">
+    <ion-list id="scoolDay-list1">
+      <ion-item color="positive" menuClose="" on-click="goToConnexion()" id="scoolDay-list-item1">
+        Connexion
+        <ion-icon name="log-in" item-right></ion-icon>
+      </ion-item>
+      <ion-item color="assertive" href-inappbrowser="/logout" id="scoolDay-list-item2">
+        Deconnexion
+        <ion-icon name="log-out" item-right></ion-icon>
+      </ion-item>
+      <ion-item color="positive" menuClose="" on-click="goToProfile()" id="scoolDay-list-item3">
+        Profile
+        <ion-icon name="create" item-right></ion-icon>
+      </ion-item>
+      <ion-item color="positive" menuClose="" on-click="goToConfiguration()" id="scoolDay-list-item32">
+        Configuration
+        <ion-icon name="settings" item-right></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mainContent [root]="rootPage"></ion-nav>
