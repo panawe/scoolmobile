@@ -1,10 +1,11 @@
 import { Constants } from '../../app/app.constants';
 import { User } from '../../app/models/user';
+import { GlobalEventsManager } from '../../app/services/globalEventsManager';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import { UserService } from '../../app/services/user.service';
-import {Cookie} from 'ng2-cookies/ng2-cookies';
-import { NotesPage } from '../notes/notes';
+import {Cookie} from 'ng2-cookies/ng2-cookies'; 
+import { TabMenuPage } from '../tab-menu/tab-menu';
 @Component({
   selector: 'page-connexion',
   templateUrl: 'connexion.html'
@@ -13,11 +14,12 @@ export class ConnexionPage {
   error:  string; 
   user: User = JSON.parse(Cookie.get('user'));
   constructor(public navCtrl: NavController,
+    private globalEventsManager: GlobalEventsManager,
       private userService: UserService) {
     if(this.user==null){
       this.user = new User();
     }else{
-      this.navCtrl.setRoot(NotesPage);
+      this.navCtrl.setRoot(TabMenuPage);
     }
   }
   public login() {
@@ -25,7 +27,8 @@ export class ConnexionPage {
       this.userService.login(this.user)
         .subscribe(result => {
           if (result == true) {
-            this.navCtrl.setRoot(NotesPage)
+             this.globalEventsManager.showNavBar.emit(this.user);
+            this.navCtrl.setRoot(TabMenuPage)
           }
           else {
             this.error = Constants.INVALID_USER_PASS;

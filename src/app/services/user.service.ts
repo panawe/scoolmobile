@@ -101,16 +101,14 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  public saveUser = (user: User): Observable<Boolean> => {
+  public saveUser = (user: User): Observable<string> => {
     let toAdd = JSON.stringify(user);
     let actionUrl = Constants.apiServer + '/service/user/saveUser';
 
     return this.http.post(actionUrl, toAdd, { headers: this.headers })
       .map((response: Response) => {
-        if (response && response.json()) {
-          return true;
-        } else {
-          return false;
+        if (response && response.json()) { 
+          return response.json();
         }
       })
       .catch(this.handleError);

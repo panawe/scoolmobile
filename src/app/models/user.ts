@@ -3,7 +3,7 @@ import { College } from '../models/college';
 import { SchoolYear } from '../models/schoolYear';
 import { Level } from './level';
 export class User {
-  id: number;
+  id: number = 0;
   address: string;
   birthDate: Date;
   cityResidence: string;
@@ -13,6 +13,7 @@ export class User {
   lastName: string;
   password: string;
   phone: string;
+  cellPhone: string;
   role: number;
   sex: string; 
   countryResidence:Country;

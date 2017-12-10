@@ -14,7 +14,9 @@
       <ion-label>
         Annee
       </ion-label>
-      <ion-select name="year"></ion-select>
+     <ion-select [(ngModel)]="year" multiple="false" (ionChange)="getSubjects()"> 
+       <ion-option *ngFor="let aYear of years" [value]="aYear.name">{{aYear.name}}</ion-option>
+    </ion-select>
     </ion-item>
   </form>
   <ion-list id="notes-list4">

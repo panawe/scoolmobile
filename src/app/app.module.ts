@@ -15,7 +15,8 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
 import { CommonSharedModule } from './common.shared.module';
 import { SchoolingService } from './services/schooling.service';
 import { UserService } from './services/user.service';
-
+import { GlobalEventsManager } from './services/globalEventsManager';
+import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -34,7 +35,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ConfigurationPage
   ],
   imports: [
-     BrowserModule, CommonSharedModule,
+     BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
+      name: '__mydb',
+         driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -55,6 +59,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,    
     UserService,
+    GlobalEventsManager,
     SchoolingService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
