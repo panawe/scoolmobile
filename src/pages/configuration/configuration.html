@@ -21,11 +21,11 @@
 
   </form>
   <button id="configuration-button5" ion-button color="positive" block (click)="test()">
-    Tester
+    {{label}}
   </button>
   <button id="configuration-button6" ion-button color="positive" block (click)="save()">
     Sauvegarder
   </button>
-   <ion-icon name="thumbs-down" color="danger" *ngIf="error" style="font-size:20px;"></ion-icon>
-   <ion-icon name="thumbs-up" color="secondary" *ngIf="msg" style="font-size:20px;"></ion-icon> 
+   <ion-icon name="thumbs-down" color="danger" *ngIf="error" style="font-size:100px;"></ion-icon>
+   <ion-icon name="thumbs-up" color="secondary" *ngIf="msg" style="font-size:100px;"></ion-icon> 
 </ion-content>

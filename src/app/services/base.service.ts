@@ -39,8 +39,8 @@ export class BaseService {
       .catch(this.handleError);
   }
 
-  public ping = (): Observable<string> => {
-    let actionUrl = Constants.apiServer + '/service/base/ping';
+  public ping = (url:string): Observable<string> => {
+    let actionUrl = url + '/service/base/ping';
     return this.http.get(actionUrl, {headers: this.headers})
       .map((response: Response) => <string>response.json())
       .catch(this.handleError);
