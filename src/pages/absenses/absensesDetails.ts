@@ -1,6 +1,5 @@
 import { Schooling } from '../../app/models/schooling';
 import { User } from '../../app/models/user';
-import { SchoolingService } from '../../app/services/schooling.service';
 import { Component } from '@angular/core';
 import { Cookie } from 'ng2-cookies';
 import { NavController, NavParams } from 'ionic-angular';
@@ -14,8 +13,7 @@ export class AbsensesDetailsPage {
   currentUser: User = JSON.parse(Cookie.get('user'));
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private schoolingService: SchoolingService) {
+              public navParams: NavParams) {
         
       if (this.currentUser == null) {
         this.currentUser = new User();

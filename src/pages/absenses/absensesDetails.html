@@ -4,14 +4,15 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Absenses
+      Absense Detail
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page5">
   
   <ion-item>
-     	<div class = "col">{{schooling.eventDate}}</div>
+     	<div class = "col">{{schooling.eventDate | date:'dd/MM/yy' }}</div>
+     	<div class = "col">{{schooling.timePeriod.description}}</div>
      	<div class = "col">{{schooling.eventType.name}}</div>
      	<div class = "col">{{schooling.description}}</div>
    </ion-item>

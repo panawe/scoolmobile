@@ -22,7 +22,7 @@
   
   <ion-list id="absenses-list">
   	<ion-item *ngFor="let schooling of schoolings" id="{{schooling.id}}" (click)="goToSchooling(schooling.id)">
-      	<div class = "col">{{schooling.eventDate}} | {{schooling.eventType}}</div>
+      	<div class = "col">{{schooling.eventDate | date:'dd/MM/yy' }} | {{schooling.eventType}}</div>
     </ion-item>
   </ion-list>
 </ion-content>
