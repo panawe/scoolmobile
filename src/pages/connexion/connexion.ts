@@ -12,15 +12,14 @@ import {Storage} from '@ionic/storage';
   templateUrl: 'connexion.html'
 })
 export class ConnexionPage {
-  error: string;
+  error: string; 
   user: User = JSON.parse(Cookie.get('user'));
   constructor(public navCtrl: NavController, private storage: Storage,
     private globalEventsManager: GlobalEventsManager,
     private userService: UserService) {
-
     this.storage.ready().then(() => {
       this.storage.get('url').then((val) => {
-        Constants.apiServer = val;
+        Constants.apiServer = val; 
       });
     });
 

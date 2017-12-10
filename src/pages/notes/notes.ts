@@ -25,7 +25,6 @@ export class NotesPage {
   public marks: MarkView[];
   public student: Student;
   public error: string;
-  public serv:string;
   @ViewChild(MatierePage) matierePage: MatierePage;
   public termResult: TermResultView = new TermResultView();
   public selectedAverage: AverageView = new AverageView();
@@ -33,7 +32,6 @@ export class NotesPage {
     private examService: ExamService,
     private studentService: StudentService,
     private baseService: BaseService) {
-    this.serv=Constants.apiServer;
     const user: User = JSON.parse(Cookie.get('user'));
     this.setStudent(user);
     this.baseService.getAllSchoolYears()

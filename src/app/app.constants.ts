@@ -1,16 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Storage} from '@ionic/storage';
+import {Injectable} from '@angular/core'; 
 @Injectable()
 export class Constants {
   public static apiServer: string = "http://localhost:8080/ipnetuniversity";
   //public static apiServer: string = "http://www.scoolday.com";
-  constructor(private storage: Storage) {
-    this.storage.ready().then(() => {
-      this.storage.get('url').then((val) => {
-        Constants.apiServer = val;
-      });
-    });
-  }
   public static ABSENCES: string = "Absenses";
   public static ACTIF = "Active";
   public static ACTIVE = "Active?";
