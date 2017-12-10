@@ -14,21 +14,27 @@
       <ion-label>
         Annee
       </ion-label>
-     <ion-select [(ngModel)]="year" multiple="false" name="year" (ionChange)="getStudentTermResults()"> 
+     <ion-select [(ngModel)]="year" multiple="false" name="year" (ionChange)="getTuitions()"> 
        <ion-option *ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
     </ion-select>
     </ion-item>
 
   </form>
-  <ion-list id="payements-list6">
-    <ion-item color="none" id="payements-list-item16">
-      Item 1
-    </ion-item>
-    <ion-item color="none" id="payements-list-item17">
-      Item 2
-    </ion-item>
-    <ion-item color="none" id="payements-list-item18">
-      Item 3
-    </ion-item>
-  </ion-list>
+  <ion-list> 
+  <ion-item *ngFor="let tuition of tuitions">
+    <ion-avatar item-start>
+      <ion-badge color="secondary" *ngIf="tuition.balance<=0">{{tuition.dueDate| date:'dd/MM/yy' }}</ion-badge>
+      <ion-badge color="primary" *ngIf="tuition.balance>0">{{tuition.dueDate| date:'dd/MM/yy' }}</ion-badge>
+    </ion-avatar>
+    <h2>{{tuition.name}}</h2>
+    <h3>Reste a payer: <ion-badge color="secondary" *ngIf="tuition.balance<=0">{{tuition.balance}}</ion-badge>
+    <ion-badge color="danger" *ngIf="tuition.balance>0">{{tuition.balance}}</ion-badge> 
+  
+    </h3>
+    <p>  Total du: <ion-badge color="secondary">{{tuition.amount}}</ion-badge>    
+    	<br/>Paye: <ion-badge color="secondary">{{tuition.paid}}</ion-badge>   
+    	<br/>Remise: <ion-badge color="secondary">{{tuition.rebate}}</ion-badge>   
+    </p>
+  </ion-item>
+</ion-list>
 </ion-content>

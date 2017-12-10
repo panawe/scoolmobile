@@ -6,6 +6,7 @@ import {Enrollment} from '../models/enrollment';
 import {User} from '../models/user';  
 import {Constants} from '../app.constants'; 
 import {MarkView} from '../models/markView' 
+import { SchoolYear } from '../models/schoolYear';
 import {TuitionView} from '../models/tuitionView'
 
 @Injectable()
@@ -37,12 +38,22 @@ export class StudentService {
       .catch(this.handleError);
   }
 
+    public getEnrollment = (student: Student, year: SchoolYear): Observable<Enrollment> => {
+    this.actionUrl = Constants.apiServer + '/service/student/getEnrollment/' + student.id +','+year.id;
+    return this.http.get(this.actionUrl)
+      .map((response: Response) => <Enrollment>response.json())
+      .catch(this.handleError);
+  }
+
   public getTuitions = (enrollment: Enrollment): Observable<TuitionView[]> => {
     let toAdd = JSON.stringify(enrollment);
     let actionUrl = Constants.apiServer + '/service/student/getTuitions';
     return this.http.post(actionUrl, toAdd, {headers: this.headers})
       .map((response: Response) => {
-        return <TuitionView[]>response.json();
+        if(response)
+          return <TuitionView[]>response.json();
+        else
+          return null;
       })
       .catch(this.handleError);
   }
