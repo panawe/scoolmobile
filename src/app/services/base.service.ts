@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
-import {Country} from '../models/country'; 
+import {Country} from '../models/country';
 import {SchoolYear} from '../models/schoolYear';
 import {EventType} from '../models/eventType';
 import {TuitionType} from '../models/tuitionType';
 import {Term} from '../models/term';
-import {TermGroup} from '../models/termGroup'; 
-import {Constants} from '../app.constants'; 
-import { Department } from '../models/department'; 
-import { Mail } from '../models/mail'; 
-import {TimePeriod} from '../models/timePeriod'; 
+import {TermGroup} from '../models/termGroup';
+import {Constants} from '../app.constants';
+import {Department} from '../models/department';
+import {Mail} from '../models/mail';
+import {TimePeriod} from '../models/timePeriod';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
-export class BaseService { 
+export class BaseService {
   private headers: Headers;
   public DAYS_MAP: {[key: number]: string} = {};
   public TIME_PERIOD_MAP: {[key: number]: string} = {};
@@ -38,7 +38,15 @@ export class BaseService {
       .map((response: Response) => <Term[]>response.json())
       .catch(this.handleError);
   }
- 
+
+  public ping = (): Observable<string> => {
+    let actionUrl = Constants.apiServer + '/service/base/ping';
+    return this.http.get(actionUrl, {headers: this.headers})
+      .map((response: Response) => <string>response.json())
+      .catch(this.handleError);
+  }
+
+
   public getSessionChart = (): Observable<any> => {
     let actionUrl = Constants.apiServer + '/service/base/getSessionChart';
     return this.http.get(actionUrl, {headers: this.headers})
@@ -54,7 +62,7 @@ export class BaseService {
       .map((response: Response) => <TermGroup[]>response.json())
       .catch(this.handleError);
   }
-   
+
   public getAllSchoolYears = (): Observable<SchoolYear[]> => {
     let actionUrl = Constants.apiServer + '/service/base/getAllSchoolYears';
     return this.http.get(actionUrl, {headers: this.headers})
@@ -69,7 +77,7 @@ export class BaseService {
       .catch(this.handleError);
   }
 
-   
+
   public getAllTuitionTypes = (): Observable<TuitionType[]> => {
     let actionUrl = Constants.apiServer + '/service/base/getAllTuitionTypes';
     return this.http.get(actionUrl, {headers: this.headers})
@@ -77,7 +85,7 @@ export class BaseService {
       .catch(this.handleError);
   }
 
-    public getAllDepartments = (): Observable<Department[]> => {
+  public getAllDepartments = (): Observable<Department[]> => {
     let actionUrl = Constants.apiServer + '/service/base/getAllDepartments';
     return this.http.get(actionUrl, {headers: this.headers})
       .map((response: Response) => <Department[]>response.json())
@@ -90,7 +98,7 @@ export class BaseService {
       .map((response: Response) => <Constants[]>response.json())
       .catch(this.handleError);
   }
- 
+
   private handleError(error: Response) {
     console.error(error);
     return Observable.throw(error.json().error || 'Server error');
@@ -140,7 +148,7 @@ export class BaseService {
       })
       .catch(this.handleError);
   }
- 
+
   public getTimePeriods = (): Observable<TimePeriod[]> => {
     let actionUrl = Constants.apiServer + '/service/base/getAllTimePeriods';
     return this.http.get(actionUrl, {headers: this.headers})

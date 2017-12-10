@@ -26,7 +26,6 @@
   <button id="configuration-button6" ion-button color="positive" block (click)="save()">
     Sauvegarder
   </button>
-  
-      <button ion-button color="danger" clear *ngIf="error">{{error}}</button>
-    <button ion-button color="secondary" clear *ngIf="msg">{{msg}}</button>
+   <ion-icon name="thumbs-down" color="danger" *ngIf="error" style="font-size:20px;"></ion-icon>
+   <ion-icon name="thumbs-up" color="secondary" *ngIf="msg" style="font-size:20px;"></ion-icon> 
 </ion-content>
