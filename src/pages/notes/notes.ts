@@ -32,7 +32,6 @@ export class NotesPage {
     private examService: ExamService,
     private studentService: StudentService,
     private baseService: BaseService) {
-    this.serv=Constants.apiServer;
     const user: User = JSON.parse(Cookie.get('user'));
     this.setStudent(user);
     this.baseService.getAllSchoolYears()
