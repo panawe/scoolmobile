@@ -11,7 +11,6 @@ import {Constants} from '../app.constants';
 import { Department } from '../models/department'; 
 import { Mail } from '../models/mail'; 
 import {TimePeriod} from '../models/timePeriod'; 
-import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
 export class BaseService { 

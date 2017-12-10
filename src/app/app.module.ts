@@ -7,6 +7,7 @@ import { PayementsPage } from '../pages/payements/payements';
 import { MessagesPage } from '../pages/messages/messages';
 import { TabMenuPage } from '../pages/tab-menu/tab-menu';
 import { AbsensesPage } from '../pages/absenses/absenses';
+import { AbsensesDetailsPage } from '../pages/absenses/absensesDetails';
 import { ConnexionPage } from '../pages/connexion/connexion';
 import { ProfilePage } from '../pages/profile/profile';
 import { MatierePage } from '../pages/matiere/matiere';
@@ -35,7 +36,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ProfilePage,
     MatierePage,
     ContenuMessagePage,
-    ConfigurationPage
+    ConfigurationPage,
+    AbsensesDetailsPage
   ],
   imports: [
      BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
@@ -56,7 +58,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ProfilePage,
     MatierePage,
     ContenuMessagePage,
-    ConfigurationPage
+    ConfigurationPage,
+    AbsensesDetailsPage
   ],
   providers: [
     StatusBar,
