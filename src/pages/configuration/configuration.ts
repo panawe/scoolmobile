@@ -9,19 +9,26 @@ import {Storage} from '@ionic/storage';
 })
 export class ConfigurationPage {
   url: string;
-  port: number;
   error: string;
   msg: string;
   constructor(public navCtrl: NavController, private storage: Storage) {
+          this.storage.ready().then(() => {
+        this.storage.get('url').then((val) => {
+          this.url=val;
+        });
+        
+      });
   }
 
   save() {
     this.error = "";
     this.msg = "";
     try {
-      this.storage.set('url', this.url);
-      this.storage.set('port', this.port);
-      this.msg = Constants.saveSuccess;
+
+      this.storage.ready().then(() => {
+        this.storage.set('url', this.url);
+        this.msg = Constants.saveSuccess;
+      });
     }
     catch (e) {
       this.error = Constants.ERROR_OCCURRED;
@@ -32,16 +39,13 @@ export class ConfigurationPage {
     this.error = "";
     this.msg = "";
     try {
-      let theUrl: string;
-      this.storage.get('url').then((val) => {
-        theUrl += val;
+      this.storage.ready().then(() => {
+        this.storage.get('url').then((val) => {
+          console.log('Your URL is', val);
+          this.msg= val;
+        });
+        
       });
-
-      this.storage.get('port').then((val) => {
-        theUrl += ':' + val;
-      });
-      
-      this.msg ='URL='+ theUrl;
     }
     catch (e) {
       this.error = Constants.ERROR_OCCURRED;
