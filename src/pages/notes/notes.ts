@@ -24,14 +24,15 @@ export class NotesPage {
   years: SchoolYear[];
   public marks: MarkView[];
   public student: Student;
-  public error: string; 
+  public error: string;
   @ViewChild(MatierePage) matierePage: MatierePage;
   public termResult: TermResultView = new TermResultView();
   public selectedAverage: AverageView = new AverageView();
   constructor(public navCtrl: NavController,
     private examService: ExamService,
     private studentService: StudentService,
-    private baseService: BaseService) { 
+    private baseService: BaseService) {
+    this.serv=Constants.apiServer;
     const user: User = JSON.parse(Cookie.get('user'));
     this.setStudent(user);
     this.baseService.getAllSchoolYears()
