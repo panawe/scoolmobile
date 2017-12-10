@@ -1,5 +1,7 @@
+import {Enrollment} from '../../app/models/enrollment';
 import {SchoolYear} from '../../app/models/schoolYear';
 import {Student} from '../../app/models/student';
+import {TuitionView} from '../../app/models/tuitionView';
 import {User} from '../../app/models/user';
 import {BaseService} from '../../app/services/base.service';
 import {StudentService} from '../../app/services/student.service';
@@ -12,10 +14,13 @@ import {Cookie} from 'ng2-cookies/ng2-cookies';
   templateUrl: 'payements.html'
 })
 export class PayementsPage {
-  year: SchoolYear;
+  year: SchoolYear = new SchoolYear();
   years: SchoolYear[];
   public student: Student;
   public error: string;
+  public enrollment: Enrollment;
+  public tuitions: TuitionView[];
+  today: Date = new Date();
   constructor(public navCtrl: NavController,
     private studentService: StudentService,
     private baseService: BaseService) {
@@ -37,20 +42,16 @@ export class PayementsPage {
     }
   }
 
-  /*
-  public getEnrollments(aUser: User) {
-    if (this.student != null) {
-      this.studentService.getEnrollments(this.student)
-        .subscribe(result => {
-          this.enrollments = result;
-        });
-    }
+  public getTuitions() {
+    this.tuitions = [];
+    this.studentService.getEnrollment(this.student, this.year)
+      .subscribe(result => {
+        this.enrollment = result;
+        this.studentService.getTuitions(this.enrollment).subscribe((data: TuitionView[]) => {this.tuitions = data;},
+          error => console.log(error),
+          () => console.log('Get tuitions'));
+      });
   }
-  public getTuitionList(evt) {
-    this.enrollment = evt.data;
-    this.enrollment.enrollmentDate = new Date(this.enrollment.enrollmentDate);
-    this.studentService.getTuitionList(this.enrollment).subscribe((data: TuitionView[]) => {this.tuitions = data;},
-      error => console.log(error),
-      () => console.log('Get tuitions'));
-  }*/
+ 
+
 }

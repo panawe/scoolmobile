@@ -5,7 +5,7 @@ export class TuitionView {
   paymentId: number;
   studentTuitionId: number;
   tuitionId: number;
-  dueDate: number;
+  dueDate: Date;
   name: string;
   amount: number;
   paid: number;

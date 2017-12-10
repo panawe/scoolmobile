@@ -10,6 +10,5 @@ export class MatierePage {
   public resultSummary: ResultSummaryView = new ResultSummaryView();
   constructor(public navCtrl: NavController,public navParams: NavParams) {
     this.resultSummary = navParams.get('resultSummary');
-  }
-  
+  }  
 }

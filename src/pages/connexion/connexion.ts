@@ -1,24 +1,32 @@
-import { Constants } from '../../app/app.constants';
-import { User } from '../../app/models/user';
-import { GlobalEventsManager } from '../../app/services/globalEventsManager';
+import {Constants} from '../../app/app.constants';
+import {User} from '../../app/models/user';
+import {GlobalEventsManager} from '../../app/services/globalEventsManager';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import { UserService } from '../../app/services/user.service';
-import {Cookie} from 'ng2-cookies/ng2-cookies'; 
-import { TabMenuPage } from '../tab-menu/tab-menu';
+import {UserService} from '../../app/services/user.service';
+import {Cookie} from 'ng2-cookies/ng2-cookies';
+import {TabMenuPage} from '../tab-menu/tab-menu';
+import {Storage} from '@ionic/storage';
 @Component({
   selector: 'page-connexion',
   templateUrl: 'connexion.html'
 })
 export class ConnexionPage {
-  error:  string; 
+  error: string;
   user: User = JSON.parse(Cookie.get('user'));
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController, private storage: Storage,
     private globalEventsManager: GlobalEventsManager,
-      private userService: UserService) {
-    if(this.user==null){
+    private userService: UserService) {
+
+    this.storage.ready().then(() => {
+      this.storage.get('url').then((val) => {
+        Constants.apiServer = val;
+      });
+    });
+
+    if (this.user == null) {
       this.user = new User();
-    }else{
+    } else {
       this.navCtrl.setRoot(TabMenuPage);
     }
   }
@@ -27,7 +35,7 @@ export class ConnexionPage {
       this.userService.login(this.user)
         .subscribe(result => {
           if (result == true) {
-             this.globalEventsManager.showNavBar.emit(this.user);
+            this.globalEventsManager.showNavBar.emit(this.user);
             this.navCtrl.setRoot(TabMenuPage)
           }
           else {
