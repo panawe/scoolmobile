@@ -33,6 +33,14 @@ export class SchoolingService {
       .catch(this.handleError);
   }
   
+  public getByStudentAndYear = (userId : number, yearId : number): Observable<SchoolingView[]> => {    
+    this.actionUrl = Constants.apiServer + '/service/schooling/student/getByUser/' + userId + '/' + yearId;
+    
+    return this.http.get(this.actionUrl)
+      .map((response: Response) => <Schooling[]>response.json())
+      .catch(this.handleError);
+  }
+  
   public getAll = (): Observable<Schooling[]> => {    
     this.actionUrl = Constants.apiServer + '/service/schooling/getAll';
     
