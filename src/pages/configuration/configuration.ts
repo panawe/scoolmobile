@@ -2,6 +2,7 @@ import {Constants} from '../../app/app.constants';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
+import {BaseService} from '../../app/services/base.service';
 
 @Component({
   selector: 'page-configuration',
@@ -11,13 +12,14 @@ export class ConfigurationPage {
   url: string;
   error: string;
   msg: string;
-  constructor(public navCtrl: NavController, private storage: Storage) {
-          this.storage.ready().then(() => {
-        this.storage.get('url').then((val) => {
-          this.url=val;
-        });
-        
+  constructor(public navCtrl: NavController, private storage: Storage,
+    private baseService: BaseService) {
+    this.storage.ready().then(() => {
+      this.storage.get('url').then((val) => {
+        this.url = val;
       });
+
+    });
   }
 
   save() {
@@ -27,6 +29,7 @@ export class ConfigurationPage {
 
       this.storage.ready().then(() => {
         this.storage.set('url', this.url);
+        Constants.apiServer = this.url;
         this.msg = Constants.saveSuccess;
       });
     }
@@ -39,13 +42,16 @@ export class ConfigurationPage {
     this.error = "";
     this.msg = "";
     try {
-      this.storage.ready().then(() => {
-        this.storage.get('url').then((val) => {
-          console.log('Your URL is', val);
-          this.msg= val;
-        });
-        
-      });
+      this.baseService.ping()
+        .subscribe((data: string) => {
+          if (data == "Success") {
+            this.msg = "Success";
+          } else {
+            this.error = Constants.ERROR_OCCURRED;
+          };
+        },
+        error => console.log(error),
+        () => console.log('Get All SchoolYears Complete'));
     }
     catch (e) {
       this.error = Constants.ERROR_OCCURRED;

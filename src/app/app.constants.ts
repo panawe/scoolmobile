@@ -199,5 +199,5 @@ export class Constants {
   public static LOCALE = "fr-FR";
   public static DOCUMENT_TYPE = "Type de Document";
   public static ASSIGN_LABEL: string = "Assigner";
-  public static ADD_COMMENT: string = "Commenter";
+  public static ADD_COMMENT: string = "Commenter"; 
 }
