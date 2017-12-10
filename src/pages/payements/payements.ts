@@ -37,6 +37,7 @@ export class PayementsPage {
     }
   }
 
+  /*
   public getEnrollments(aUser: User) {
     if (this.student != null) {
       this.studentService.getEnrollments(this.student)
@@ -51,5 +52,5 @@ export class PayementsPage {
     this.studentService.getTuitionList(this.enrollment).subscribe((data: TuitionView[]) => {this.tuitions = data;},
       error => console.log(error),
       () => console.log('Get tuitions'));
-  }
+  }*/
 }
