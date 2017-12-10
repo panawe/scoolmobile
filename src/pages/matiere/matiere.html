@@ -4,20 +4,27 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Matiere
+      {{resultSummary.term}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page8">
-  <ion-list id="matiere-list5">
-    <ion-item color="none" id="matiere-list-item10">
-      Item 1
-    </ion-item>
-    <ion-item color="none" id="matiere-list-item11">
-      Item 2
-    </ion-item>
-    <ion-item color="none" id="matiere-list-item12">
-      Item 3
-    </ion-item>
-  </ion-list>
+  <ion-list>
+  <ion-item *ngFor="let avg of resultSummary.averages">
+    <ion-avatar item-start>
+      <ion-badge color="secondary" *ngIf="avg.averageMark*20/avg.maxMark>=10">{{avg.averageMark| number : '1.2-2'}}/{{avg.maxMark}}</ion-badge>
+      <ion-badge color="danger" *ngIf="avg.averageMark*20/avg.maxMark<10">{{avg.averageMark| number : '1.2-2'}}/{{avg.maxMark}}</ion-badge>
+    </ion-avatar>
+    <h2>{{avg.subjectName}}</h2>
+    <h3>Moy. classe: 
+          <ion-badge color="secondary" *ngIf="avg.classMark*20/avg.maxMark>=10">{{avg.classMark| number : '1.2-2' }}</ion-badge>
+          <ion-badge color="danger" *ngIf="avg.classMark*20/avg.maxMark<10">{{avg.classMark| number : '1.2-2' }}</ion-badge> 
+          <br/>
+          Note. Final: 
+          <ion-badge color="secondary" *ngIf="avg.examMark*20/avg.maxMark>=10">{{avg.examMark| number : '1.2-2' }}</ion-badge>
+          <ion-badge color="danger" *ngIf="avg.examMark*20/avg.maxMark<10">{{avg.examMark| number : '1.2-2' }}</ion-badge> 
+    </h3>
+    <p>Prof: {{avg.teacherFirstName +' '+avg.teacherLastName}}</p>
+  </ion-item>
+</ion-list>
 </ion-content>

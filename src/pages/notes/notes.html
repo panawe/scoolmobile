@@ -14,20 +14,26 @@
       <ion-label>
         Annee
       </ion-label>
-     <ion-select [(ngModel)]="year" multiple="false" (ionChange)="getSubjects()"> 
-       <ion-option *ngFor="let aYear of years" [value]="aYear.name">{{aYear.name}}</ion-option>
+     <ion-select [(ngModel)]="year" multiple="false" name="year" (ionChange)="getStudentTermResults()"> 
+       <ion-option *ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
     </ion-select>
     </ion-item>
+
   </form>
-  <ion-list id="notes-list4">
-    <ion-item color="none" on-click="goToMatiere()" id="notes-list-item7">
-      Item 1
-    </ion-item>
-    <ion-item color="none" on-click="goToMatiere()" id="notes-list-item8">
-      Item 2
-    </ion-item>
-    <ion-item color="none" on-click="goToMatiere()" id="notes-list-item9">
-      Item 3
-    </ion-item>
-  </ion-list>
+  
+  <ion-list>
+  <ion-item *ngFor="let resultSummary of termResult.resultSummaries" (click)="getAverages(resultSummary)">
+    <ion-avatar item-start>
+      <ion-badge color="secondary" *ngIf="resultSummary.mark>=10">{{resultSummary.decision}}</ion-badge>
+      <ion-badge color="danger" *ngIf="resultSummary.mark<10">{{resultSummary.decision}}</ion-badge>
+    </ion-avatar>
+    <h2>{{resultSummary.term}}</h2>
+    <h3>Note: {{resultSummary.mark| number : '1.2-2' }} - 
+          <ion-badge color="secondary" *ngIf="resultSummary.mark>=10">{{resultSummary.gradeName}}</ion-badge>
+      <ion-badge color="danger" *ngIf="resultSummary.mark<10">{{resultSummary.gradeName}}</ion-badge>    
+    </h3>
+    <p>Rang: {{resultSummary.rankNbr}}</p>
+  </ion-item>
+</ion-list>
+ 
 </ion-content>

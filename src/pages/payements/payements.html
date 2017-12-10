@@ -9,13 +9,16 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page3">
-  <form id="payements-form4">
-    <ion-item id="payements-select2">
+  <form id="notes-form3">
+    <ion-item id="notes-select1">
       <ion-label>
         Annee
       </ion-label>
-      <ion-select name="year"></ion-select>
+     <ion-select [(ngModel)]="year" multiple="false" name="year" (ionChange)="getStudentTermResults()"> 
+       <ion-option *ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
+    </ion-select>
     </ion-item>
+
   </form>
   <ion-list id="payements-list6">
     <ion-item color="none" id="payements-list-item16">

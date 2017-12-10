@@ -15,6 +15,9 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
 import { CommonSharedModule } from './common.shared.module';
 import { SchoolingService } from './services/schooling.service';
 import { UserService } from './services/user.service';
+import { BaseService } from './services/base.service';
+import { ExamService } from './services/exam.service';
+import { StudentService } from './services/student.service';
 import { GlobalEventsManager } from './services/globalEventsManager';
 import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -59,6 +62,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,    
     UserService,
+    BaseService,
+    ExamService,
+    StudentService,
     GlobalEventsManager,
     SchoolingService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

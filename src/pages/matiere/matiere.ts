@@ -1,13 +1,15 @@
+import { ResultSummaryView } from '../../app/models/resultSummaryView';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-matiere',
   templateUrl: 'matiere.html'
 })
 export class MatierePage {
-
-  constructor(public navCtrl: NavController) {
+  public resultSummary: ResultSummaryView = new ResultSummaryView();
+  constructor(public navCtrl: NavController,public navParams: NavParams) {
+    this.resultSummary = navParams.get('resultSummary');
   }
   
 }
