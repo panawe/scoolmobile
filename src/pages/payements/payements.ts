@@ -62,14 +62,14 @@ export class PayementsPage {
 
   public getTuitions() {
     this.tuitions = [];
-    if(this.student&&this.year)
-    this.studentService.getEnrollment(this.student, this.year)
-      .subscribe(result => {
-        this.enrollment = result;
-        this.studentService.getTuitions(this.enrollment).subscribe((data: TuitionView[]) => {this.tuitions = data;},
-          error => console.log(error),
-          () => console.log('Get tuitions'));
-      });
+    if (this.student && this.year)
+      this.studentService.getEnrollment(this.student, this.year)
+        .subscribe(result => {
+          this.enrollment = result;
+          this.studentService.getTuitions(this.enrollment).subscribe((data: TuitionView[]) => {this.tuitions = data;},
+            error => console.log(error),
+            () => console.log('Get tuitions'));
+        });
   }
 
 
