@@ -35,7 +35,16 @@ export class PayementsPage {
       .subscribe((data: SchoolYear) => {
         this.year = data;
         if (this.year != null) {
-          this.getTuitions();
+          if (this.student != null) {
+            this.getTuitions();
+          } else {
+            this.studentService.getByUser(user)
+              .subscribe(result => {
+                this.student = result;
+                this.getTuitions();
+              });
+          }
+
         }
       }, error => console.log(error),
       () => console.log('Get getTuitions Complete'));
@@ -53,6 +62,7 @@ export class PayementsPage {
 
   public getTuitions() {
     this.tuitions = [];
+    if(this.student&&this.year)
     this.studentService.getEnrollment(this.student, this.year)
       .subscribe(result => {
         this.enrollment = result;
