@@ -11,7 +11,6 @@ import {Constants} from '../app.constants';
 import {Department} from '../models/department';
 import {Mail} from '../models/mail';
 import {TimePeriod} from '../models/timePeriod';
-import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
 export class BaseService {
@@ -25,6 +24,13 @@ export class BaseService {
     this.headers.append('Accept', 'application/json');
   }
 
+  public getCurrentSchoolYear = (): Observable<SchoolYear> => {
+    let actionUrl = Constants.apiServer + '/service/base/getCurrentSchoolYear';
+    return this.http.get(actionUrl, {headers: this.headers})
+      .map((response: Response) => <SchoolYear>response.json())
+      .catch(this.handleError);
+  }
+  
   public getAllCountries = (): Observable<Country[]> => {
     let actionUrl = Constants.apiServer + '/service/base/getAllCountries';
     return this.http.get(actionUrl, {headers: this.headers})

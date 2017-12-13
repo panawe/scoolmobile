@@ -38,6 +38,16 @@ export class NotesPage {
       .subscribe((data: SchoolYear[]) => this.years = data,
       error => console.log(error),
       () => console.log('Get All SchoolYears Complete'));
+
+    this.baseService.getCurrentSchoolYear()
+      .subscribe((data: SchoolYear) => {
+        this.year = data;
+        if (this.year != null) {
+          this.getStudentTermResults();
+        }
+      },
+      error => console.log(error),
+      () => console.log('Get getStudentTermResults Complete'));
   }
   goToMatiere(params) {
     if (!params) params = {};

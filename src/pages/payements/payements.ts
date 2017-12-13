@@ -30,6 +30,15 @@ export class PayementsPage {
       .subscribe((data: SchoolYear[]) => this.years = data,
       error => console.log(error),
       () => console.log('Get All SchoolYears Complete'));
+
+    this.baseService.getCurrentSchoolYear()
+      .subscribe((data: SchoolYear) => {
+        this.year = data;
+        if (this.year != null) {
+          this.getTuitions();
+        }
+      }, error => console.log(error),
+      () => console.log('Get getTuitions Complete'));
   }
 
   public setStudent(aUser: User) {
@@ -52,6 +61,6 @@ export class PayementsPage {
           () => console.log('Get tuitions'));
       });
   }
- 
+
 
 }
