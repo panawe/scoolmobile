@@ -9,14 +9,38 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page4">
-  <ion-list id="messages-list7">
-    <ion-item color="none" on-click="goToContenuMessage()" id="messages-list-item19">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Item
-      </h2>
-    </ion-item>
+
+<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+<div padding>
+  <ion-segment [(ngModel)]="msgType">
+    <ion-segment-button value="1">
+      Alertes
+    </ion-segment-button>
+    <ion-segment-button value="2">
+      SD Messages
+    </ion-segment-button> 
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="msgType">
+  <ion-list *ngSwitchCase="'1'">
+    <ion-item *ngFor="let item of items">
+      <ion-thumbnail item-start>
+        <img src="img/thumbnail-puppy-1.jpg">
+      </ion-thumbnail>
+      <h2>{{ item }} - Ruby</h2>
+    </ion-item> 
   </ion-list>
+
+  <ion-list *ngSwitchCase="'2'">
+    <ion-item *ngFor="let item of items">
+      <ion-thumbnail item-start>
+        <img src="img/thumbnail-kitten-1.jpg">
+      </ion-thumbnail>
+      <h2>{{ item }} - Raven</h2>
+    </ion-item> 
+  </ion-list> 
+</div>
+ 
 </ion-content>
