@@ -8,5 +8,6 @@ export class SDMessage {
   status: number;
   msgType: number; 
   createDate: Date;
-  modDate: Date;  
+  modDate: Date;
+  shortMessage: string; 
 }
