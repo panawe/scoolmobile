@@ -18,18 +18,21 @@ export class MessagesPage {
   receivedMsgs: SDMessage[];
   msgCounts: number[];
   msgType: number;
-  user: User = JSON.parse(Cookie.get('user'));
+  user: User = JSON.parse(Cookie.get('loggedInUser'));
   url: string = Constants.apiServer;
   constructor(public navCtrl: NavController, private baseService: BaseService) {
     this.initializeItems();
   }
   goToContenuMessage(message: SDMessage) {
-    message.status = 1;
-    this.msgCounts[this.msgType - 1]--;
-    this.baseService.markSDMessageAsRead(message)
-      .subscribe((data: string) => {console.log(data)},
-      error => console.log(error),
-      () => console.log('Mark Message as Read Complete'));
+    if (message.status == 0) {
+      message.status = 1;
+      this.msgCounts[this.msgType - 1]--;
+      this.baseService.markSDMessageAsRead(message)
+        .subscribe((data: string) => {console.log(data)},
+        error => console.log(error),
+        () => console.log('Mark Message as Read Complete'));
+    }
+
     this.navCtrl.push(ContenuMessagePage, {
       message
     });

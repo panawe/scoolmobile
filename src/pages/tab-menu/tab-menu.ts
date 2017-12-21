@@ -3,7 +3,7 @@ import {BaseService} from '../../app/services/base.service';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {NotesPage} from '../notes/notes';
-import {PayementsPage} from '../payements/payements';
+import {PayementsPage} from '../payements/payements'; 
 import {MessagesPage} from '../messages/messages';
 import {AbsensesPage} from '../absenses/absenses';
 import {Cookie} from 'ng2-cookies';
@@ -23,7 +23,7 @@ export class TabMenuPage {
   }
 
   initializeItems() {
-    const user: User = JSON.parse(Cookie.get('user'));
+    const user: User = JSON.parse(Cookie.get('loggedInUser'));  
     this.baseService.countSDMessages(user.id, 30)
       .subscribe((data: number) => this.newMsgCount = data,
       error => console.log(error),

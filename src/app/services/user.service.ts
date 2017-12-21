@@ -65,6 +65,16 @@ export class UserService {
       .catch(this.handleError);
   } 
   
+  public getUsersLightByParent = (parentId: number): Observable<User[]> => {
+    let toAdd = JSON.stringify(parentId);
+    let actionUrl = Constants.apiServer + '/service/user/getUsersLightByParentId';
+    return this.http.post(actionUrl, toAdd, { headers: this.headers })
+      .map((response: Response) => {
+        return <User[]>response.json();
+      })
+      .catch(this.handleError);
+  } 
+  
  public getStudentUsersByParent = (parentId: number): Observable<StudentView[]> => {
     let toAdd = JSON.stringify(parentId);
     let actionUrl = Constants.apiServer + '/service/user/getStudentsByParentId';
@@ -88,6 +98,7 @@ export class UserService {
           if (token) {
 
             Cookie.set('user', JSON.stringify(response.json()));
+            Cookie.set('loggedInUser', JSON.stringify(response.json()));
             return true;
           } else {
             return false;

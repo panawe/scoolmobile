@@ -8,6 +8,10 @@
   </ion-header>
   <ion-content id="side-menu21">
     <ion-list id="scoolDay-list1">
+      <ion-item color="positive" menuClose="" on-click="goToMain()" id="scoolDay-list-item1" *ngIf="user.id>0">
+        Accueil
+        <ion-icon name="home" item-right></ion-icon>
+      </ion-item>
       <ion-item color="positive" menuClose="" on-click="goToConnexion()" id="scoolDay-list-item1" *ngIf="!user.id>0">
         Connexion
         <ion-icon name="log-in" item-right></ion-icon>
@@ -23,6 +27,11 @@
       <ion-item color="positive" menuClose="" on-click="goToConfiguration()" id="scoolDay-list-item32">
         Configuration
         <ion-icon name="settings" item-right></ion-icon>
+      </ion-item>
+      
+            <ion-item color="positive" menuClose="" on-click="goToStudent()" id="scoolDay-list-item1" *ngIf="user.id>0 && user.role==4">
+        Choisir un enfant
+        <ion-icon name="people" item-right></ion-icon>
       </ion-item>
     </ion-list>
   </ion-content>

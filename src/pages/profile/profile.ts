@@ -16,7 +16,7 @@ export class ProfilePage {
   user: User;
   constructor(public navCtrl: NavController,
     private userService: UserService) {
-    this.user = JSON.parse(Cookie.get('user'));
+    this.user = JSON.parse(Cookie.get('loggedInUser'));
     this.userService.getById(this.user)
       .subscribe((data: User) => {
         this.user = data

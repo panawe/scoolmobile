@@ -4,6 +4,7 @@ import {GlobalEventsManager} from '../../app/services/globalEventsManager';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {UserService} from '../../app/services/user.service';
+import {StudentsPage} from '../students/students';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
 import {TabMenuPage} from '../tab-menu/tab-menu';
 import {Storage} from '@ionic/storage';
@@ -12,21 +13,25 @@ import {Storage} from '@ionic/storage';
   templateUrl: 'connexion.html'
 })
 export class ConnexionPage {
-  error: string; 
-  user: User = JSON.parse(Cookie.get('user'));
+  error: string;
+  user: User = JSON.parse(Cookie.get('loggedInUser'));
   constructor(public navCtrl: NavController, private storage: Storage,
     private globalEventsManager: GlobalEventsManager,
     private userService: UserService) {
     this.storage.ready().then(() => {
       this.storage.get('url').then((val) => {
-        Constants.apiServer = val; 
+        Constants.apiServer = val;
       });
     });
 
     if (this.user == null) {
       this.user = new User();
     } else {
-      this.navCtrl.setRoot(TabMenuPage);
+      if (this.user.role == 4) {
+        this.navCtrl.setRoot(StudentsPage);
+      } else {
+        this.navCtrl.setRoot(TabMenuPage);
+      }
     }
   }
   public login() {
@@ -34,8 +39,13 @@ export class ConnexionPage {
       this.userService.login(this.user)
         .subscribe(result => {
           if (result == true) {
+            this.user=JSON.parse(Cookie.get('loggedInUser'));
             this.globalEventsManager.showNavBar.emit(this.user);
-            this.navCtrl.setRoot(TabMenuPage)
+            if (this.user.role == 4) {
+              this.navCtrl.setRoot(StudentsPage);
+            } else {
+              this.navCtrl.setRoot(TabMenuPage);
+            }
           }
           else {
             this.error = Constants.INVALID_USER_PASS;
@@ -45,7 +55,5 @@ export class ConnexionPage {
     catch (e) {
       this.error = Constants.ERROR_OCCURRED;
     }
-
-
   }
 }
