@@ -10,6 +10,7 @@ import { AbsensesPage } from '../pages/absenses/absenses';
 import { AbsensesDetailsPage } from '../pages/absenses/absensesDetails';
 import { ConnexionPage } from '../pages/connexion/connexion';
 import { ProfilePage } from '../pages/profile/profile';
+import { StudentsPage } from '../pages/students/students';
 import { MatierePage } from '../pages/matiere/matiere';
 import { ContenuMessagePage } from '../pages/contenu-message/contenu-message';
 import { ConfigurationPage } from '../pages/configuration/configuration';
@@ -34,7 +35,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AbsensesPage,
     ConnexionPage,
     ProfilePage,
-    MatierePage,
+    MatierePage,StudentsPage,
     ContenuMessagePage,
     ConfigurationPage,
     AbsensesDetailsPage
@@ -56,7 +57,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AbsensesPage,
     ConnexionPage,
     ProfilePage,
-    MatierePage,
+    MatierePage,StudentsPage,
     ContenuMessagePage,
     ConfigurationPage,
     AbsensesDetailsPage

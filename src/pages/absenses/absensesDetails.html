@@ -1,19 +1,21 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Absense Detail
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding id="page5">
-  
-  <ion-item>
-     	<div class = "col">{{schooling.eventDate | date:'dd/MM/yy' }}</div>
-     	<div class = "col">{{schooling.timePeriod.description}}</div>
-     	<div class = "col">{{schooling.eventType.name}}</div>
-     	<div class = "col">{{schooling.description}}</div>
-   </ion-item>
-</ion-content>
+<ion-header> <ion-navbar>
+<button ion-button menuToggle>
+	<ion-icon name="menu"></ion-icon>
+</button>
+<ion-title> Absense Detail </ion-title> </ion-navbar> </ion-header>
+<ion-content padding id="page5"> <ion-item text-wrap>
+<div class="col">
+	<ion-badge color="primary">{{schooling.eventDate |
+	date:'dd/MM/yy' }}</ion-badge>
+</div>
+<div class="col">
+	<h3>{{schooling.eventType.name}}</h3>
+</div>
+<div class="col">
+	<h5>{{schooling.timePeriod.description}}</h5>
+</div>
+
+<div class="col">
+	<p>{{schooling.description}}</p>
+</div>
+</ion-item> </ion-content>

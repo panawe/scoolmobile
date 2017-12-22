@@ -30,6 +30,24 @@ export class PayementsPage {
       .subscribe((data: SchoolYear[]) => this.years = data,
       error => console.log(error),
       () => console.log('Get All SchoolYears Complete'));
+
+    this.baseService.getCurrentSchoolYear()
+      .subscribe((data: SchoolYear) => {
+        this.year = data;
+        if (this.year != null) {
+          if (this.student != null) {
+            this.getTuitions();
+          } else {
+            this.studentService.getByUser(user)
+              .subscribe(result => {
+                this.student = result;
+                this.getTuitions();
+              });
+          }
+
+        }
+      }, error => console.log(error),
+      () => console.log('Get getTuitions Complete'));
   }
 
   public setStudent(aUser: User) {
@@ -44,14 +62,15 @@ export class PayementsPage {
 
   public getTuitions() {
     this.tuitions = [];
-    this.studentService.getEnrollment(this.student, this.year)
-      .subscribe(result => {
-        this.enrollment = result;
-        this.studentService.getTuitions(this.enrollment).subscribe((data: TuitionView[]) => {this.tuitions = data;},
-          error => console.log(error),
-          () => console.log('Get tuitions'));
-      });
+    if (this.student && this.year)
+      this.studentService.getEnrollment(this.student, this.year)
+        .subscribe(result => {
+          this.enrollment = result;
+          this.studentService.getTuitions(this.enrollment).subscribe((data: TuitionView[]) => {this.tuitions = data;},
+            error => console.log(error),
+            () => console.log('Get tuitions'));
+        });
   }
- 
+
 
 }

@@ -10,8 +10,8 @@ import {TermGroup} from '../models/termGroup';
 import {Constants} from '../app.constants';
 import {Department} from '../models/department';
 import {Mail} from '../models/mail';
+import {SDMessage} from '../models/sdMessage';
 import {TimePeriod} from '../models/timePeriod';
-import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
 export class BaseService {
@@ -23,6 +23,13 @@ export class BaseService {
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Accept', 'application/json');
+  }
+
+  public getCurrentSchoolYear = (): Observable<SchoolYear> => {
+    let actionUrl = Constants.apiServer + '/service/base/getCurrentSchoolYear';
+    return this.http.get(actionUrl, {headers: this.headers})
+      .map((response: Response) => <SchoolYear>response.json())
+      .catch(this.handleError);
   }
 
   public getAllCountries = (): Observable<Country[]> => {
@@ -39,7 +46,7 @@ export class BaseService {
       .catch(this.handleError);
   }
 
-  public ping = (url:string): Observable<string> => {
+  public ping = (url: string): Observable<string> => {
     let actionUrl = url + '/service/base/ping';
     return this.http.get(actionUrl, {headers: this.headers})
       .map((response: Response) => <string>response.json())
@@ -114,6 +121,16 @@ export class BaseService {
       .catch(this.handleError);
   }
 
+    public markSDMessageAsRead = (param: SDMessage): Observable<string> => {
+    let actionUrl = Constants.apiServer + '/service/base/markSDMessageAsRead';
+    let toAdd = JSON.stringify(param);
+    return this.http.post(actionUrl, toAdd, {headers: this.headers})
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch(this.handleError);
+  } 
+  
   public getAvgProgress = (param: number): Observable<string> => {
     let actionUrl = Constants.apiServer + '/service/base/getAvgProgress';
     let toAdd = JSON.stringify(param);
@@ -155,6 +172,33 @@ export class BaseService {
       .map((response: Response) => {
         return response.json();
       })
+      .catch(this.handleError);
+  }
+
+  public getUserSDMessages = (userId: number, period: number, msgType: number): Observable<SDMessage[]> => {
+    let actionUrl = Constants.apiServer + '/service/base/getUserSDMessages/' + userId + '/' + period+ '/' + msgType;
+    return this.http.get(actionUrl)
+      .map((response: Response) => <SDMessage[]>response.json())
+      .catch(this.handleError);
+  }
+
+    public getSentSDMessages = (userId: number, period: number): Observable<SDMessage[]> => {
+    let actionUrl = Constants.apiServer + '/service/base/getSentSDMessages/' + userId + '/' + period;
+    return this.http.get(actionUrl)
+      .map((response: Response) => <SDMessage[]>response.json())
+      .catch(this.handleError);
+  }
+  public countSDMessages = (userId: number, period: number): Observable<number> => {
+    let actionUrl = Constants.apiServer + '/service/base/countSDMessages/' + userId + '/' + period;
+    return this.http.get(actionUrl)
+      .map((response: Response) => <number>response.json())
+      .catch(this.handleError);
+  }
+
+  public countSDMessagesByType = (userId: number, period: number): Observable<number[]> => {
+    let actionUrl = Constants.apiServer + '/service/base/countSDMessagesByType/' + userId + '/' + period;
+    return this.http.get(actionUrl)
+      .map((response: Response) => <number[]>response.json())
       .catch(this.handleError);
   }
 }

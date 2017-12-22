@@ -1,22 +1,79 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Messages
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding id="page4">
-  <ion-list id="messages-list7">
-    <ion-item color="none" on-click="goToContenuMessage()" id="messages-list-item19">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Item
-      </h2>
-    </ion-item>
-  </ion-list>
+<ion-header> <ion-navbar>
+<button ion-button menuToggle>
+	<ion-icon name="menu"></ion-icon>
+</button>
+<ion-title> Messages </ion-title> </ion-navbar> </ion-header>
+<ion-content padding id="page4"> <ion-searchbar
+	(ionInput)="getItems($event)"></ion-searchbar>
+
+<div padding>
+	<ion-segment [(ngModel)]="msgType"> <ion-segment-button
+		value="1">Alerte<ion-badge color="danger"
+		*ngIf="msgCounts && msgCounts[0]>0">{{msgCounts[0]}}</ion-badge> </ion-segment-button> <ion-segment-button
+		value="2">Message<ion-badge
+		*ngIf="msgCounts && msgCounts[1]>0" color="danger">{{msgCounts[1]}}</ion-badge>
+	</ion-segment-button> <ion-segment-button value="3">Envoye<ion-badge
+		*ngIf="msgCounts && msgCounts[2]>0" color="danger">{{msgCounts[2]}}</ion-badge>
+	</ion-segment-button> </ion-segment>
+</div>
+
+<div [ngSwitch]="msgType">
+
+	<ion-list *ngSwitchCase="'1'"> <ion-item-sliding
+		(click)="goToContenuMessage(item)" *ngFor="let item of alerts">
+	<ion-item > <ion-avatar item-start> <img
+		src="{{url}}/assets/images/user/{{item.sender.pic}}" alt="" /> <font
+		size="1" color="gray">{{item.sender.firstName +' '+item.sender.lastName}} <br /> {{item.createDate| date:'dd/MM/yy'}}
+	</font></ion-avatar>
+	<h3 *ngIf="item.status==0" id="contenuMessage-heading1"
+		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h3>
+	<h5 *ngIf="item.status==1" id="contenuMessage-heading1"
+		style="color: #0078ae;">{{item.subject}}</h5>
+	<div [innerHTML]="item.shortMessage"></div>
+	</ion-item> <ion-item-options side="right">
+	<button ion-button color="danger" (click)="deleteMessage(item)">
+		<ion-icon name="trash"></ion-icon>
+		Supprimer
+	</button>
+	</ion-item-options> </ion-item-sliding> </ion-list>
+
+
+	<ion-list *ngSwitchCase="'2'"> <ion-item-sliding
+		(click)="goToContenuMessage(item)" *ngFor="let item of receivedMsgs">
+	<ion-item text-wrap> <ion-avatar item-start> <img
+		src="{{url}}/assets/images/user/{{item.sender.pic}}" alt="" /> <font
+		size="1" color="gray">{{item.sender.firstName +' '+item.sender.lastName}} <br /> {{item.createDate| date:'dd/MM/yy'}}
+	</font> </ion-avatar>
+	<h3 *ngIf="item.status==0" id="contenuMessage-heading1"
+		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h3>
+	<h5 *ngIf="item.status==1" id="contenuMessage-heading1"
+		style="color: #0078ae;">{{item.subject}}</h5>
+	<div [innerHTML]="item.shortMessage"></div>
+	</ion-item> <ion-item-options side="right">
+	<button ion-button color="danger" (click)="deleteMessage(item)">
+		<ion-icon name="trash"></ion-icon>
+		Supprimer
+	</button>
+	</ion-item-options> </ion-item-sliding> </ion-list>
+
+	<ion-list *ngSwitchCase="'3'"> <ion-item-sliding
+		(click)="goToContenuMessage(item)" *ngFor="let item of sentMsgs">
+	<ion-item text-wrap> <ion-avatar item-start> <img
+		src="{{url}}/assets/images/user/{{item.recipient.pic}}" alt="" /> <font
+		size="1" color="gray">{{item.sender.firstName +' '+item.sender.lastName}} <br /> {{item.createDate| date:'dd/MM/yy'}}
+	</font></ion-avatar>
+	<h3 *ngIf="item.status==0" id="contenuMessage-heading1"
+		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h3>
+	<h5 *ngIf="item.status==1" id="contenuMessage-heading1"
+		style="color: #0078ae;">{{item.subject}}</h5>
+	<div [innerHTML]="item.shortMessage"></div>
+	</ion-item> <ion-item-options side="right">
+	<button ion-button color="danger" (click)="deleteMessage(item)">
+		<ion-icon name="trash"></ion-icon>
+		Supprimer
+	</button>
+	</ion-item-options> </ion-item-sliding> </ion-list>
+
+</div>
+
 </ion-content>

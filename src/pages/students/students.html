@@ -1,0 +1,17 @@
+<ion-header> <ion-navbar>
+<button ion-button menuToggle>
+	<ion-icon name="menu"></ion-icon>
+</button>
+<ion-title> Mes Enfants </ion-title> </ion-navbar> </ion-header>
+<ion-content padding id="page3">  
+<ion-list>
+  <ion-item (click)="goToContenuNotes(student)" *ngFor="let student of children">
+    <ion-thumbnail item-start>
+      <img src="{{url}}/assets/images/user/{{student.pic}}" alt="" />
+    </ion-thumbnail>
+    <h2>{{student.firstName +'	'+student.lastName}}</h2>
+    <p>{{student.userName}}</p>
+    <button ion-button clear item-end (click)="goToContenuNotes(student)">Choisir</button>
+  </ion-item>
+</ion-list>
+</ion-content>
