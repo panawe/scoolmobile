@@ -16,10 +16,10 @@ import {ViewChild} from '@angular/core';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Component({
-  selector: 'page-notes',
-  templateUrl: 'notes.html'
+  selector: 'page-notes-admin',
+  templateUrl: 'notes-admin.html'
 })
-export class NotesPage {
+export class NotesAdminPage {
   year: SchoolYear;
   years: SchoolYear[];
   public marks: MarkView[];
@@ -100,7 +100,7 @@ export class NotesPage {
     this.termResult = new TermResultView();
     this.marks = null;
     this.error = null;
-    if (this.year != null && this.student != null && this.student.id > 0) {
+    if (this.year != null && this.student != null &&this.student.id>0) {
       this.examService.getStudentYearResults(this.year.id + "," + this.student.id)
         .subscribe((data: TermResultView) => {
           this.termResult = data;

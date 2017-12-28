@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Notes
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page2">
+  <form id="notes-form3">
+    <ion-item id="notes-select1">
+      <ion-label>
+        Annee - Admin
+      </ion-label>
+     <ion-select [(ngModel)]="year" multiple="false" name="year" (ionChange)="getStudentTermResults()"> 
+       <ion-option *ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
+    </ion-select>
+    </ion-item>
+
+  </form>
+  <ion-list>
+  <ion-item *ngFor="let resultSummary of termResult.resultSummaries" (click)="getAverages(resultSummary)">
+    <ion-avatar item-start>
+      <ion-badge color="secondary" *ngIf="resultSummary.mark>=10">{{resultSummary.decision}}</ion-badge>
+      <ion-badge color="danger" *ngIf="resultSummary.mark<10">{{resultSummary.decision}}</ion-badge>
+    </ion-avatar>
+    <h2>{{resultSummary.term}}</h2>
+    <h3>Note: {{resultSummary.mark| number : '1.2-2' }} - 
+          <ion-badge color="secondary" *ngIf="resultSummary.mark>=10">{{resultSummary.gradeName}}</ion-badge>
+      <ion-badge color="danger" *ngIf="resultSummary.mark<10">{{resultSummary.gradeName}}</ion-badge>    
+    </h3>
+    <p>Rang: {{resultSummary.rankNbr}}</p>
+  </ion-item>
+</ion-list>
+ 
+</ion-content>

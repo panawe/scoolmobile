@@ -7,6 +7,7 @@ import { PayementsPage } from '../pages/payements/payements';
 import { MessagesPage } from '../pages/messages/messages';
 import { TabMenuPage } from '../pages/tab-menu/tab-menu';
 import { AbsensesPage } from '../pages/absenses/absenses';
+import { AbsensesAdminPage } from "../pages/absenses/absenses-admin";
 import { AbsensesDetailsPage } from '../pages/absenses/absensesDetails';
 import { ConnexionPage } from '../pages/connexion/connexion';
 import { ProfilePage } from '../pages/profile/profile';
@@ -14,6 +15,9 @@ import { StudentsPage } from '../pages/students/students';
 import { MatierePage } from '../pages/matiere/matiere';
 import { ContenuMessagePage } from '../pages/contenu-message/contenu-message';
 import { ConfigurationPage } from '../pages/configuration/configuration';
+import { NotesAdminPage } from "../pages/notes/notes-admin";
+import { CoursPage } from "../pages/payements/cours";
+import { PayementsAdminPage } from "../pages/payements/payements-admin";
 import { CommonSharedModule } from './common.shared.module';
 import { SchoolingService } from './services/schooling.service';
 import { UserService } from './services/user.service';
@@ -24,11 +28,15 @@ import { GlobalEventsManager } from './services/globalEventsManager';
 import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import {  ChartModule }         from 'primeng/primeng';
 @NgModule({
   declarations: [
     MyApp,
     NotesPage,
+    NotesAdminPage,
+    PayementsAdminPage,
+    AbsensesAdminPage,
+    CoursPage,
     PayementsPage,
     MessagesPage,
     TabMenuPage,
@@ -41,7 +49,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AbsensesDetailsPage
   ],
   imports: [
-     BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
+     ChartModule,BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
       name: '__mydb',
          driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
@@ -56,7 +64,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabMenuPage,
     AbsensesPage,
     ConnexionPage,
-    ProfilePage,
+    ProfilePage,    
+    NotesAdminPage,
+    PayementsAdminPage,
+    AbsensesAdminPage,
+    CoursPage,
     MatierePage,StudentsPage,
     ContenuMessagePage,
     ConfigurationPage,

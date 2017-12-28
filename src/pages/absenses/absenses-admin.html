@@ -1,0 +1,20 @@
+<ion-header> <ion-navbar>
+<button ion-button menuToggle>
+	<ion-icon name="menu"></ion-icon>
+</button>
+<ion-title> Absenses </ion-title> </ion-navbar> </ion-header>
+<ion-content padding id="page5">
+<form id="absenses-form5">
+	<ion-item id="absenses-select4"> <ion-label>
+	Annee - Admin</ion-label> <ion-select [(ngModel)]="year" multiple="false" name="year"
+		(ionChange)="getUserSchoolings()"> <ion-option
+		*ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
+	</ion-select> </ion-item>
+</form>
+
+<ion-list> <ion-item *ngFor="let schooling of schoolings"
+	(click)="goToSchooling(schooling.id)"> <ion-avatar
+	item-start> <ion-badge color="primary">{{schooling.eventDate| date:'dd/MM/yy' }}</ion-badge> </ion-avatar>
+<h3>{{schooling.eventType}}</h3> 
+<p>{{schooling.description}}</p>
+</ion-item> </ion-list> </ion-content>

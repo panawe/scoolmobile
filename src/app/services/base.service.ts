@@ -12,6 +12,7 @@ import {Department} from '../models/department';
 import {Mail} from '../models/mail';
 import {SDMessage} from '../models/sdMessage';
 import {TimePeriod} from '../models/timePeriod';
+import { TuitionView } from "../models/tuitionView";
 
 @Injectable()
 export class BaseService {
@@ -121,7 +122,7 @@ export class BaseService {
       .catch(this.handleError);
   }
 
-    public markSDMessageAsRead = (param: SDMessage): Observable<string> => {
+  public markSDMessageAsRead = (param: SDMessage): Observable<string> => {
     let actionUrl = Constants.apiServer + '/service/base/markSDMessageAsRead';
     let toAdd = JSON.stringify(param);
     return this.http.post(actionUrl, toAdd, {headers: this.headers})
@@ -129,8 +130,8 @@ export class BaseService {
         return response.json();
       })
       .catch(this.handleError);
-  } 
-  
+  }
+
   public getAvgProgress = (param: number): Observable<string> => {
     let actionUrl = Constants.apiServer + '/service/base/getAvgProgress';
     let toAdd = JSON.stringify(param);
@@ -151,6 +152,15 @@ export class BaseService {
       .catch(this.handleError);
   }
 
+  public getPaymentGraphTotal = (param: number): Observable<string> => {
+    let actionUrl = Constants.apiServer + '/service/base/getPaymentGraphTotal';
+    let toAdd = JSON.stringify(param);
+    return this.http.post(actionUrl, toAdd, {headers: this.headers})
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch(this.handleError);
+  }
 
   public sendMassMail = (mail: Mail): Observable<boolean> => {
     let toAdd = JSON.stringify(mail);
@@ -176,13 +186,13 @@ export class BaseService {
   }
 
   public getUserSDMessages = (userId: number, period: number, msgType: number): Observable<SDMessage[]> => {
-    let actionUrl = Constants.apiServer + '/service/base/getUserSDMessages/' + userId + '/' + period+ '/' + msgType;
+    let actionUrl = Constants.apiServer + '/service/base/getUserSDMessages/' + userId + '/' + period + '/' + msgType;
     return this.http.get(actionUrl)
       .map((response: Response) => <SDMessage[]>response.json())
       .catch(this.handleError);
   }
 
-    public getSentSDMessages = (userId: number, period: number): Observable<SDMessage[]> => {
+  public getSentSDMessages = (userId: number, period: number): Observable<SDMessage[]> => {
     let actionUrl = Constants.apiServer + '/service/base/getSentSDMessages/' + userId + '/' + period;
     return this.http.get(actionUrl)
       .map((response: Response) => <SDMessage[]>response.json())
@@ -199,6 +209,20 @@ export class BaseService {
     let actionUrl = Constants.apiServer + '/service/base/countSDMessagesByType/' + userId + '/' + period;
     return this.http.get(actionUrl)
       .map((response: Response) => <number[]>response.json())
+      .catch(this.handleError);
+  }
+  
+  
+    public getTuitions = (sy: SchoolYear): Observable<TuitionView[]> => {
+    let toAdd = JSON.stringify(sy);
+    let actionUrl = Constants.apiServer + '/service/base/getTuitions';
+    return this.http.post(actionUrl, toAdd, {headers: this.headers})
+      .map((response: Response) => {
+        if(response)
+          return <TuitionView[]>response.json();
+        else
+          return null;
+      })
       .catch(this.handleError);
   }
 }

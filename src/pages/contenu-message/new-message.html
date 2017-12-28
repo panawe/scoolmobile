@@ -1,0 +1,16 @@
+<ion-header> <ion-navbar>
+<button ion-button menuToggle>
+	<ion-icon name="menu"></ion-icon>
+</button>
+<ion-title> Contenu Message </ion-title> </ion-navbar> </ion-header>
+<ion-content padding id="page9"> <ion-list> <ion-item text-wrap>
+<ion-avatar item-start> <img
+	src="{{url}}/assets/images/user/{{message.sender.pic}}" alt="" /> <font
+	size="1" color="gray">{{message.sender.firstName +'
+	'+message.sender.lastName}} <br /> {{message.createDate|date:'dd/MM/yy' }}
+</font> </ion-avatar>
+<p>{{message.subject}}</p>
+</ion-item>
+<br/>
+<div [innerHTML]="message.body"></div>
+</ion-list> </ion-content>
