@@ -4,6 +4,9 @@ export class MarkView {
   examId: number;
   matricule: string;
   name: string;
+  firstName: string;
+  lastName: string;
+  pic: string;
   mark: number;
   maxMark: number;
   grade: string;

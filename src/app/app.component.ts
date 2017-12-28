@@ -54,10 +54,10 @@ export class MyApp {
   } goToMain(params) {
     if (!params) params = {};
     if (this.user != null) {
-      if (this.user.role == 3) {
-        this.navCtrl.setRoot(TabMenuPage);
-      } else {
+      if (this.user.role == 4) {
         this.navCtrl.setRoot(StudentsPage);
+      } else {
+        this.navCtrl.setRoot(TabMenuPage);        
       }
     } else {
       this.navCtrl.setRoot(ConnexionPage);

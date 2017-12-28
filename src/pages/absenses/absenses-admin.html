@@ -4,17 +4,26 @@
 </button>
 <ion-title> Absenses </ion-title> </ion-navbar> </ion-header>
 <ion-content padding id="page5">
-<form id="absenses-form5">
-	<ion-item id="absenses-select4"> <ion-label>
-	Annee - Admin</ion-label> <ion-select [(ngModel)]="year" multiple="false" name="year"
-		(ionChange)="getUserSchoolings()"> <ion-option
-		*ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
-	</ion-select> </ion-item>
+<form (ngSubmit)="search()" #searchForm="ngForm">
+	<ion-grid> <ion-row> <ion-col col-8>
+	<ion-input type="text" [(ngModel)]="searchText" name="searchT"
+		placeholder="nom et/ou le prenom"></ion-input> </ion-col> <ion-col col-4>
+	<button ion-button color="Primary" (click)="search()">GO</button>
+	</ion-col> </ion-row> </ion-grid>
+
 </form>
 
-<ion-list> <ion-item *ngFor="let schooling of schoolings"
-	(click)="goToSchooling(schooling.id)"> <ion-avatar
-	item-start> <ion-badge color="primary">{{schooling.eventDate| date:'dd/MM/yy' }}</ion-badge> </ion-avatar>
-<h3>{{schooling.eventType}}</h3> 
-<p>{{schooling.description}}</p>
-</ion-item> </ion-list> </ion-content>
+<button ion-button color="danger" *ngIf="error">{{error}}</button>
+<ion-list>
+  <ion-item (click)="chooseUser(aUser)" *ngFor="let aUser of users">
+    <ion-thumbnail item-start>
+      <img src="{{url}}/assets/images/user/{{aUser.pic}}" alt="" />
+    </ion-thumbnail>
+    <h2>{{aUser.firstName +'	'+aUser.lastName}}</h2>
+    <p>{{aUser.userName}}</p>
+     <ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 
+  </ion-item>
+  
+</ion-list>
+
+ </ion-content>

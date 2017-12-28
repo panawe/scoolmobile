@@ -147,7 +147,7 @@ export class Constants {
   public static SAVE_LABEL: string = "Sauvegarder";
   public static saveFailed: string = "La sauvegarde n'a pas marche. Verifiez tous les champs.";
   public static saveNotSuccess: string = "La sauvegarde n'a pas marchee. ";
-  public static saveSuccess: string = "La sauvegarde a marchee. ";
+  public static saveSuccess: string = "Sauvegarde avec succes. ";
   public static SCHOOL_RESULTS: string = "Resultats Scolaire";
   public static SCHOOL_YEAR: string = "Annee Scolaire";
   public static SCHOOLING: string = "Scolarite";

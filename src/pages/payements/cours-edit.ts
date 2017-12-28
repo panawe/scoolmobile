@@ -3,33 +3,24 @@ import {SyllabusView} from "../../app/models/syllabusView";
 import {User} from '../../app/models/user';
 import {SyllabusService} from "../../app/services/syllabus.service";
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
-import {CoursEditPage} from './cours-edit'; 
+
 @Component({
-  selector: 'page-cours',
-  templateUrl: 'cours.html'
+  selector: 'page-cours-edit',
+  templateUrl: 'cours-edit.html'
 })
-export class CoursPage {
+export class CoursEditPage {
   syllabuses: SyllabusView[];
-  public courses: Course[];
   course: Course = new Course();
   user: User = JSON.parse(Cookie.get('loggedInUser'));
   constructor(public navCtrl: NavController,
-    private syllabusService: SyllabusService) {
-    this.getCourseByTeacher(this.user);
+    private syllabusService: SyllabusService,
+    public navParams: NavParams) {
+    this.course = navParams.get('course');
+    this.getSyllabuses();
   }
-  public getCourseByTeacher(user: User): void {
-    this.courses = [];
-    this.syllabusService.getByTeacher(user)
-      .subscribe((data: Course[]) => {
-        this.courses = data
-      },
-      error => console.log(error),
-      () => console.log('Get all Courses complete'));
-  }
-  public getSyllabuses(evt) {
-    this.course = evt.data;
+  public getSyllabuses() {
     this.syllabusService.getSyllabuses(this.course.id + '', this.course.classe.level.id + '',
       this.course.subject.id + '')
       .subscribe((data: SyllabusView[]) => {
@@ -76,11 +67,4 @@ export class CoursPage {
       error => console.log(error),
       () => console.log('Save Syllabus'));
   }
-
-  chooseCourse(aCourse: Course){
-        this.navCtrl.push(CoursEditPage, {
-      course: aCourse
-    });
-  }
-
 }

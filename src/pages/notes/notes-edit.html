@@ -1,0 +1,28 @@
+<ion-header> <ion-navbar>
+<button ion-button menuToggle>
+	<ion-icon name="menu"></ion-icon>
+</button>
+<ion-title> Notes </ion-title> </ion-navbar> </ion-header>
+<ion-content padding id="page2"> <ion-item>
+<h5>{{exam.course.subject.name+' - '+exam.name}}</h5>
+<p>{{exam.course.classe.name}} - {{exam.examDate| date:'dd/MM/yy' }}
+	- {{exam.course.teacher.name}}</p>
+<ion-badge color="secondary" clear item-end>note sur <br />
+{{exam.maxMark}}</ion-badge> </ion-item>
+
+<button ion-button color="danger" *ngIf="error">{{error}}</button>
+
+<ion-list> <ion-item *ngFor="let aMark of marks" text-wrap>
+ <ion-avatar item-start> <ion-thumbnail item-start>
+<img src="{{url}}/assets/images/user/{{aMark.pic}}" alt="" />
+</ion-thumbnail> </ion-avatar>
+<h6>{{aMark.matricule +' - '+aMark.name}}</h6>
+ 
+	
+	<button ion-fab mini clear item-end  color="{{color}}" (click)="saveMark(aMark)"><ion-icon name="{{icon}}"></ion-icon></button>
+	
+	<input pInputText name="mark"
+	placeholder="Note" [(ngModel)]="aMark.mark" name="mark" size="5" /> <ion-badge
+	color="secondary" *ngIf="aMark.mark*20/aMark.maxMark>=10">{{aMark.grade}}</ion-badge>
+<ion-badge color="danger" *ngIf="aMark.mark*20/aMark.maxMark<10">{{aMark.grade}}</ion-badge>
+</ion-item> </ion-list> </ion-content>

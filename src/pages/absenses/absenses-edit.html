@@ -1,0 +1,45 @@
+<ion-header> <ion-navbar>
+<button ion-button menuToggle>
+	<ion-icon name="menu"></ion-icon>
+</button>
+<ion-title> Absenses - Saisie </ion-title> </ion-navbar> </ion-header>
+<ion-content padding id="page5"> <ion-item> <ion-thumbnail
+	item-start> <img
+	src="{{url}}/assets/images/user/{{user.pic}}" alt="" /> </ion-thumbnail>
+<h2>{{user.firstName +' '+user.lastName}}</h2>
+<p>{{user.userName}}</p>
+</ion-item>
+<form id="notes-form3">
+	<ion-item id=" select1"> <ion-label> Evenement </ion-label>
+	<ion-select [(ngModel)]="schooling.eventType" multiple="false"
+		name="event"> <ion-option
+		*ngFor="let aEvent of eventTypes" [value]="aEvent">{{aEvent.name}}</ion-option>
+	</ion-select> </ion-item>
+
+	<ion-item id=" select2"> <ion-label> Heure </ion-label> <ion-select
+		[(ngModel)]="schooling.timePeriod" multiple="false" name="timePeriod">
+	<ion-option *ngFor="let aTimePeriod of timePeriods"
+		[value]="aTimePeriod">{{aTimePeriod.description}}</ion-option> </ion-select> </ion-item>
+
+	<ion-item> <ion-input type="text" placeholder="Commentaires"
+		name="Commentaires" [(ngModel)]="schooling.description"></ion-input> </ion-item>
+	<ion-grid> <ion-row> <ion-col col-6>
+	<button ion-button color="primary" (click)="save()">Sauvegarder</button>
+	</ion-col> <ion-col col-6>
+	<ion-item>
+	<ion-label>E-mail</ion-label> <ion-checkbox color="primary"
+		checked="true" [(ngModel)]="schooling.sendEmail" name="sendEmail"></ion-checkbox></ion-item>
+	</ion-col> </ion-row> </ion-grid>
+
+
+	<button ion-button color="danger" *ngIf="error" clear>{{error}}</button>
+	<button ion-button color="secondary" *ngIf="msg" clear>{{msg}}</button>
+</form>
+
+<hr />
+<ion-list> <ion-item *ngFor="let aSchooling of schoolings">
+<ion-avatar item-start> <ion-badge color="primary">{{aSchooling.eventDate
+| date:'dd/MM/yy' }}</ion-badge> </ion-avatar>
+<h3>{{aSchooling.eventType}}</h3>
+<p>{{aSchooling.description}}</p>
+</ion-item> </ion-list> </ion-content>

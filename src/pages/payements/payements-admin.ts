@@ -15,7 +15,7 @@ import { PayementsStudentPage } from "./payements-student";
 export class PayementsAdminPage {
   year: SchoolYear = new SchoolYear();
   years: SchoolYear[];
-  data: any;
+  data: any;  
   public student: Student;
   public error: string;
   public enrollment: Enrollment;

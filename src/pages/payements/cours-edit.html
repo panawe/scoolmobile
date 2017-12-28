@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Cours
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page3">
+  <ion-item>
+    <h5>{{course.subject.name}}</h5>
+    <p>{{course.classe.level.name +' - '+course.classe.name}}</p>
+  </ion-item>   
+  <ion-list> 
+  <ion-item *ngFor="let aSyllabus of syllabuses" text-wrap>
+ <ion-avatar item-start> 
+   <p-toggleButton  [(ngModel)]="aSyllabus.status"
+				onLabel="Fini" offLabel="Pas fini" onIcon="fa-check-square"
+				offIcon="fa-square" (click)="saveSyllabusStatus(aSyllabus)"></p-toggleButton>
+				<br/>
+ <ion-badge *ngIf="aSyllabus.syllabusDate" color="primary" >{{aSyllabus.syllabusDate| date:'dd/MM/yy' }}</ion-badge>
+ </ion-avatar>
+ 
+ <div [innerHTML]="aSyllabus.courseTopicName"></div>  
+ 
+
+
+  
+</ion-item> </ion-list>
+ 
+</ion-content>

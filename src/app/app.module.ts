@@ -8,6 +8,7 @@ import { MessagesPage } from '../pages/messages/messages';
 import { TabMenuPage } from '../pages/tab-menu/tab-menu';
 import { AbsensesPage } from '../pages/absenses/absenses';
 import { AbsensesAdminPage } from "../pages/absenses/absenses-admin";
+import { AbsensesEditPage } from "../pages/absenses/absenses-edit";
 import { AbsensesDetailsPage } from '../pages/absenses/absensesDetails';
 import { ConnexionPage } from '../pages/connexion/connexion';
 import { ProfilePage } from '../pages/profile/profile';
@@ -15,8 +16,11 @@ import { StudentsPage } from '../pages/students/students';
 import { MatierePage } from '../pages/matiere/matiere';
 import { ContenuMessagePage } from '../pages/contenu-message/contenu-message';
 import { ConfigurationPage } from '../pages/configuration/configuration';
+import { NewMessagePage } from "../pages/contenu-message/new-message";
 import { NotesAdminPage } from "../pages/notes/notes-admin";
+import { NotesEditPage } from "../pages/notes/notes-edit";
 import { CoursPage } from "../pages/payements/cours";
+import { CoursEditPage } from "../pages/payements/cours-edit";
 import { PayementsAdminPage } from "../pages/payements/payements-admin";
 import { PayementsStudentPage } from "../pages/payements/payements-student";
 import { CommonSharedModule } from './common.shared.module';
@@ -24,12 +28,13 @@ import { SchoolingService } from './services/schooling.service';
 import { UserService } from './services/user.service';
 import { BaseService } from './services/base.service';
 import { ExamService } from './services/exam.service';
+import { SyllabusService } from './services/syllabus.service';
 import { StudentService } from './services/student.service';
 import { GlobalEventsManager } from './services/globalEventsManager';
 import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {  ChartModule }         from 'primeng/primeng';
+import { ChartModule, ToggleButtonModule }         from 'primeng/primeng';
 @NgModule({
   declarations: [
     MyApp,
@@ -38,10 +43,14 @@ import {  ChartModule }         from 'primeng/primeng';
     PayementsAdminPage,
     AbsensesAdminPage,
     PayementsStudentPage,
+    NewMessagePage,
+    AbsensesEditPage,
     CoursPage,
+    NotesEditPage,
     PayementsPage,
     MessagesPage,
     TabMenuPage,
+    CoursEditPage,
     AbsensesPage,
     ConnexionPage,
     ProfilePage,
@@ -51,7 +60,7 @@ import {  ChartModule }         from 'primeng/primeng';
     AbsensesDetailsPage
   ],
   imports: [
-     ChartModule,BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
+     ChartModule,ToggleButtonModule,BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
       name: '__mydb',
          driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
@@ -70,7 +79,11 @@ import {  ChartModule }         from 'primeng/primeng';
     NotesAdminPage,
     PayementsAdminPage,
     AbsensesAdminPage,
+    NotesEditPage,
+    CoursEditPage,
     PayementsStudentPage,
+    AbsensesEditPage,
+    NewMessagePage,
     CoursPage,
     MatierePage,StudentsPage,
     ContenuMessagePage,
@@ -83,6 +96,7 @@ import {  ChartModule }         from 'primeng/primeng';
     UserService,
     BaseService,
     ExamService,
+    SyllabusService,
     StudentService,
     GlobalEventsManager,
     SchoolingService,
