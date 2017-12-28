@@ -18,6 +18,7 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
 import { NotesAdminPage } from "../pages/notes/notes-admin";
 import { CoursPage } from "../pages/payements/cours";
 import { PayementsAdminPage } from "../pages/payements/payements-admin";
+import { PayementsStudentPage } from "../pages/payements/payements-student";
 import { CommonSharedModule } from './common.shared.module';
 import { SchoolingService } from './services/schooling.service';
 import { UserService } from './services/user.service';
@@ -36,6 +37,7 @@ import {  ChartModule }         from 'primeng/primeng';
     NotesAdminPage,
     PayementsAdminPage,
     AbsensesAdminPage,
+    PayementsStudentPage,
     CoursPage,
     PayementsPage,
     MessagesPage,
@@ -68,6 +70,7 @@ import {  ChartModule }         from 'primeng/primeng';
     NotesAdminPage,
     PayementsAdminPage,
     AbsensesAdminPage,
+    PayementsStudentPage,
     CoursPage,
     MatierePage,StudentsPage,
     ContenuMessagePage,

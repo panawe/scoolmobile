@@ -6,6 +6,7 @@ import {TuitionView} from '../../app/models/tuitionView';
 import {BaseService} from '../../app/services/base.service';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
+import { PayementsStudentPage } from "./payements-student";
 
 @Component({
   selector: 'page-payements-admin',
@@ -32,13 +33,14 @@ export class PayementsAdminPage {
         this.year = data;
         if (this.year != null) {
           this.getPaymentGraph();
-          this.getTuitions();
+          
         }
       }, error => console.log(error),
       () => console.log('Get getTuitions Complete'));
   }
 
   public getTuitions() {
+    this.tuitions=[];
     this.baseService.getTuitions(this.year).subscribe((data: TuitionView[]) => {this.tuitions = data;},
       error => console.log(error),
       () => console.log('Get tuitions'));
@@ -61,18 +63,13 @@ export class PayementsAdminPage {
     catch (e) {
       console.log(e);
     }
+    this.getTuitions();
   }
 
-  getClassTuitions(event) {
-    this.tuitions = [];
-    /*
-  this.searchCriteria = Constants.ETAT + " = " + event.element._model.label;
-  console.log('Getting online registration by Status: ' + event.element._model.label);
-  this.studentService.getOnlineRegistrationsByType('status|' + event.element._model.label)
-    .subscribe(result => {
-      this.onlineRegistrations = result;
-      //console.log(this.onlineRegistrations);
+  getClassTuitions(data) {
+    this.navCtrl.push(PayementsStudentPage, {
+          tuition: data
     });
-    */
+
   }
 }

@@ -213,9 +213,22 @@ export class BaseService {
   }
   
   
-    public getTuitions = (sy: SchoolYear): Observable<TuitionView[]> => {
+  public getTuitions = (sy: SchoolYear): Observable<TuitionView[]> => {
     let toAdd = JSON.stringify(sy);
     let actionUrl = Constants.apiServer + '/service/base/getTuitions';
+    return this.http.post(actionUrl, toAdd, {headers: this.headers})
+      .map((response: Response) => {
+        if(response)
+          return <TuitionView[]>response.json();
+        else
+          return null;
+      })
+      .catch(this.handleError);
+  }
+  
+  public getClassTuitions = (tv: TuitionView): Observable<TuitionView[]> => {
+    let toAdd = JSON.stringify(tv);
+    let actionUrl = Constants.apiServer + '/service/base/getClassTuitions';
     return this.http.post(actionUrl, toAdd, {headers: this.headers})
       .map((response: Response) => {
         if(response)

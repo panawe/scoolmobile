@@ -4,32 +4,19 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Payements
+      Payements classe
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page3">
-  <form id="notes-form3">
-    <ion-item id="notes-select1">
-      <ion-label>
-        Annee
-      </ion-label>
-     <ion-select [(ngModel)]="year" multiple="false" name="year" (ionChange)="getPaymentGraph()"> 
-       <ion-option *ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
-    </ion-select>
-    </ion-item>
-
-  </form>
-  <p-chart type="bar" [data]="data"></p-chart>
   <ion-list> 
-  <ion-item *ngFor="let tuition of tuitions" (click)="getClassTuitions(tuition)">
+  <ion-item *ngFor="let tuition of tuitions">
     <h2>{{tuition.name}}</h2>
     <h3>Reste: <ion-badge color="secondary">{{tuition.balance |number :'1.0-2'}}</ion-badge> sur <ion-badge color="secondary">{{tuition.amount|number :'1.0-2'}}</ion-badge> 
     </h3>
     <p>Paye: <ion-badge color="secondary">{{tuition.paid|number :'1.0-2'}}</ion-badge>      
     	 Remise: <ion-badge color="secondary">{{tuition.rebate|number :'1.0-2'}}</ion-badge>   
     </p>
-    <ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 
-  </ion-item>
+    </ion-item>
 </ion-list>
 </ion-content>
