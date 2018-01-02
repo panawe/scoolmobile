@@ -133,7 +133,7 @@ export class StudentService {
       .catch(this.handleError);
   }
 
-  public saveTuition = (tuitionView: Enrollment): Observable<TuitionView> => {
+  public saveTuition = (tuitionView: TuitionView): Observable<TuitionView> => {
     let toAdd = JSON.stringify(tuitionView);
     let actionUrl = Constants.apiServer + '/service/student/saveTuition';
     return this.http.post(actionUrl, toAdd, {headers: this.headers})

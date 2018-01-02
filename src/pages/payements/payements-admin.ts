@@ -68,8 +68,8 @@ export class PayementsAdminPage {
 
   getClassTuitions(data) {
     this.navCtrl.push(PayementsStudentPage, {
-          tuition: data
+          tuition: data,
+          year: this.year
     });
-
   }
 }

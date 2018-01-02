@@ -8,11 +8,15 @@ import {TuitionType} from '../models/tuitionType';
 import {Term} from '../models/term';
 import {TermGroup} from '../models/termGroup';
 import {Constants} from '../app.constants';
+import {Class} from "../models/class";
 import {Department} from '../models/department';
+import {Enrollment} from "../models/enrollment";
+import { ExamType } from "../models/examType";
 import {Mail} from '../models/mail';
 import {SDMessage} from '../models/sdMessage';
+import {Subject} from "../models/subject";
 import {TimePeriod} from '../models/timePeriod';
-import { TuitionView } from "../models/tuitionView";
+import {TuitionView} from "../models/tuitionView";
 
 @Injectable()
 export class BaseService {
@@ -26,6 +30,25 @@ export class BaseService {
     this.headers.append('Accept', 'application/json');
   }
 
+  public getAllClasses = (): Observable<Class[]> => {
+    const actionUrl = Constants.apiServer + '/service/class/getAll';
+    return this.http.get(actionUrl)
+      .map((response: Response) => <Class[]>response.json())
+      .catch(this.handleError);
+  }
+
+  public getAllSubjects = (): Observable<Subject[]> => {
+    const actionUrl = Constants.apiServer + '/service/subject/getAll';
+    return this.http.get(actionUrl)
+      .map((response: Response) => <Subject[]>response.json())
+      .catch(this.handleError);
+  }
+  public getAllExamTypes = (): Observable<ExamType[]> => {
+    let actionUrl = Constants.apiServer + '/service/base/getAllExamTypes';
+    return this.http.get(actionUrl, {headers: this.headers})
+      .map((response: Response) => <ExamType[]>response.json())
+      .catch(this.handleError);
+  }
   public getCurrentSchoolYear = (): Observable<SchoolYear> => {
     let actionUrl = Constants.apiServer + '/service/base/getCurrentSchoolYear';
     return this.http.get(actionUrl, {headers: this.headers})
@@ -211,27 +234,38 @@ export class BaseService {
       .map((response: Response) => <number[]>response.json())
       .catch(this.handleError);
   }
-  
-  
+
+
   public getTuitions = (sy: SchoolYear): Observable<TuitionView[]> => {
     let toAdd = JSON.stringify(sy);
     let actionUrl = Constants.apiServer + '/service/base/getTuitions';
     return this.http.post(actionUrl, toAdd, {headers: this.headers})
       .map((response: Response) => {
-        if(response)
+        if (response)
           return <TuitionView[]>response.json();
         else
           return null;
       })
       .catch(this.handleError);
   }
-  
+  public getStudentTuitions = (enrollment: Enrollment): Observable<TuitionView[]> => {
+    let toAdd = JSON.stringify(enrollment);
+    let actionUrl = Constants.apiServer + '/service/student/getTuitions';
+    return this.http.post(actionUrl, toAdd, {headers: this.headers})
+      .map((response: Response) => {
+        if (response)
+          return <TuitionView[]>response.json();
+        else
+          return null;
+      })
+      .catch(this.handleError);
+  }
   public getClassTuitions = (tv: TuitionView): Observable<TuitionView[]> => {
     let toAdd = JSON.stringify(tv);
     let actionUrl = Constants.apiServer + '/service/base/getClassTuitions';
     return this.http.post(actionUrl, toAdd, {headers: this.headers})
       .map((response: Response) => {
-        if(response)
+        if (response)
           return <TuitionView[]>response.json();
         else
           return null;

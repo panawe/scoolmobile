@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Tranches de Payement
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page3">
+<ion-item text-wrap>
+<h2>{{tuition.name}}</h2> </ion-item>
+
+  <ion-list> 
+  <ion-item *ngFor="let tuition of tuitions" text-wrap>
+    <h2>{{tuition.name}}</h2>
+    <h2>Reste: <ion-badge color="secondary" *ngIf="tuition.balance<=0">{{tuition.balance |number :'1.0-2'}}</ion-badge>
+    <ion-badge color="danger" *ngIf="tuition.balance>0">{{tuition.balance |number :'1.0-2'}}</ion-badge> sur <ion-badge color="secondary">{{tuition.amount|number :'1.0-2'}}</ion-badge> 
+    </h2>
+    <p>Paye: <ion-badge color="secondary">{{tuition.paid|number :'1.0-2'}}</ion-badge>    
+    <input  pInputText name="newpay" placeholder="" [(ngModel)]="tuition.newPay" size="3" />      	 
+    </p>
+    <p>
+    Remise: <ion-badge color="secondary">{{tuition.rebate|number :'1.0-2'}}</ion-badge>   
+     <input  pInputText name="newRebate" placeholder="" [(ngModel)]="tuition.newRebate" size="3" />
+    </p>
+    <button ion-fab mini clear item-end  color="{{color}}" (click)="saveTuition(tuition)"><ion-icon name="{{icon}}"></ion-icon></button>
+ 
+    </ion-item>
+</ion-list>
+</ion-content>

@@ -28,11 +28,9 @@
     </ion-avatar>
     <h2>{{tuition.name}}</h2>
     <h3>Reste a payer: <ion-badge color="secondary" *ngIf="tuition.balance<=0">{{tuition.balance}}</ion-badge>
-    <ion-badge color="danger" *ngIf="tuition.balance>0">{{tuition.balance}}</ion-badge> 
-  
+    <ion-badge color="danger" *ngIf="tuition.balance>0">{{tuition.balance}}</ion-badge>   
     </h3>
-    <p>  Total du: <ion-badge color="secondary">{{tuition.amount}}</ion-badge>    
-    	<br/>Paye: <ion-badge color="secondary">{{tuition.paid}}</ion-badge>   
+    <p> Paye: <ion-badge color="secondary">{{tuition.paid}}</ion-badge>  sur <ion-badge color="secondary">{{tuition.amount}}</ion-badge>   
     	<br/>Remise: <ion-badge color="secondary">{{tuition.rebate}}</ion-badge>   
     </p>
   </ion-item>

@@ -9,19 +9,21 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page2">
-<form (ngSubmit)="search()" #searchForm="ngForm">
+<form  #searchForm="ngForm">
 	<ion-grid> <ion-row> <ion-col col-8>
 	<ion-input type="text" [(ngModel)]="searchText" name="searchT"
-		placeholder="description, classe ou matiere"></ion-input> </ion-col> <ion-col col-4>
-	<button ion-button color="Primary" (click)="search()">GO</button>
-	</ion-col> </ion-row> </ion-grid>
+		placeholder="description, classe ou matiere"></ion-input> </ion-col> <ion-col col-2>
+	<button ion-fab mini  color="Primary" (click)="search()">GO</button> 	
+	</ion-col>
+	<ion-col col-2><button ion-fab mini clear item-end  color="primary" (click)="newExam()"><ion-icon  name="add" ></ion-icon></button></ion-col>
+	 </ion-row> </ion-grid>
 
 </form>
 
 <button ion-button color="danger" *ngIf="error">{{error}}</button>
 <ion-list>
   <ion-item (click)="chooseExam(aExam)" *ngFor="let aExam of exams">
-    <h5>{{aExam.course.subject.name+' - '+aExam.name}}</h5>
+    <h2>{{aExam.course.subject.name+' - '+aExam.name}}</h2>
     <p>{{aExam.course.classe.name}} - {{aExam.examDate| date:'dd/MM/yy' }} - {{aExam.course.teacher.name}}</p>
      <ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 
   </ion-item>  

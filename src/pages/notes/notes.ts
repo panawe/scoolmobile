@@ -22,9 +22,10 @@ import {Cookie} from 'ng2-cookies/ng2-cookies';
 export class NotesPage {
   year: SchoolYear;
   years: SchoolYear[];
-  public marks: MarkView[];
+  public marks: MarkView[] = [];
   public student: Student;
   public error: string;
+  msgType: number = 1;
   @ViewChild(MatierePage) matierePage: MatierePage;
   public termResult: TermResultView = new TermResultView();
   public selectedAverage: AverageView = new AverageView();
@@ -53,11 +54,6 @@ export class NotesPage {
     if (!params) params = {};
     this.navCtrl.push(MatierePage);
   }
-
-  getSubjects() {
-
-  }
-
 
   public setStudent(aUser: User) {
     if (aUser != null && aUser.id > 0) {
@@ -104,10 +100,17 @@ export class NotesPage {
       this.examService.getStudentYearResults(this.year.id + "," + this.student.id)
         .subscribe((data: TermResultView) => {
           this.termResult = data;
+          if (this.termResult != null && this.termResult.resultSummaries != null && this.termResult.resultSummaries.length > 0){
+            this.msgType = 1;
+          }else{
+            this.msgType = 2;
+          } 
         });
     } else {
       this.error = Constants.SELECT_YEAR;
     }
+
+    this.getStudentMarks();
   }
 
 

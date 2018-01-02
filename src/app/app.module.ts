@@ -19,10 +19,12 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
 import { NewMessagePage } from "../pages/contenu-message/new-message";
 import { NotesAdminPage } from "../pages/notes/notes-admin";
 import { NotesEditPage } from "../pages/notes/notes-edit";
+import { NotesEditMainPage } from "../pages/notes/notes-edit-main";
 import { CoursPage } from "../pages/payements/cours";
 import { CoursEditPage } from "../pages/payements/cours-edit";
 import { PayementsAdminPage } from "../pages/payements/payements-admin";
 import { PayementsStudentPage } from "../pages/payements/payements-student";
+import { PayementsStudentDtlPage } from "../pages/payements/payements-student-dtl";
 import { CommonSharedModule } from './common.shared.module';
 import { SchoolingService } from './services/schooling.service';
 import { UserService } from './services/user.service';
@@ -45,6 +47,8 @@ import { ChartModule, ToggleButtonModule }         from 'primeng/primeng';
     PayementsStudentPage,
     NewMessagePage,
     AbsensesEditPage,
+    PayementsStudentDtlPage,
+    NotesEditMainPage,
     CoursPage,
     NotesEditPage,
     PayementsPage,
@@ -79,8 +83,10 @@ import { ChartModule, ToggleButtonModule }         from 'primeng/primeng';
     NotesAdminPage,
     PayementsAdminPage,
     AbsensesAdminPage,
+    NotesEditMainPage,
     NotesEditPage,
     CoursEditPage,
+    PayementsStudentDtlPage,
     PayementsStudentPage,
     AbsensesEditPage,
     NewMessagePage,

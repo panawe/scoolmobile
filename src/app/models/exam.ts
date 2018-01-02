@@ -14,5 +14,6 @@ export class Exam {
   maxMark: number;
   publishMarks: boolean;
   evaluationType: number;
+  modifiedBy:number;
   error:string;
 }

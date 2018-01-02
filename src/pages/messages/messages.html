@@ -25,10 +25,10 @@
 		src="{{url}}/assets/images/user/{{item.sender.pic}}" alt="" /> <font
 		size="1" color="gray">{{item.sender.firstName +' '+item.sender.lastName}} <br /> {{item.createDate| date:'dd/MM/yy'}}
 	</font></ion-avatar>
-	<h3 *ngIf="item.status==0" id="contenuMessage-heading1"
-		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h3>
-	<h5 *ngIf="item.status==1" id="contenuMessage-heading1"
-		style="color: #0078ae;">{{item.subject}}</h5>
+	<h2 *ngIf="item.status==0" id="contenuMessage-heading1"
+		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h2>
+	<h2 *ngIf="item.status==1" id="contenuMessage-heading1"
+		style="color: #0078ae;">{{item.subject}}</h2>
 	<div [innerHTML]="item.shortMessage"></div>
 	</ion-item> <ion-item-options side="right">
 	<button ion-button color="danger" (click)="deleteMessage(item)">
@@ -44,10 +44,10 @@
 		src="{{url}}/assets/images/user/{{item.sender.pic}}" alt="" /> <font
 		size="1" color="gray">{{item.sender.firstName +' '+item.sender.lastName}} <br /> {{item.createDate| date:'dd/MM/yy'}}
 	</font> </ion-avatar>
-	<h3 *ngIf="item.status==0" id="contenuMessage-heading1"
-		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h3>
-	<h5 *ngIf="item.status==1" id="contenuMessage-heading1"
-		style="color: #0078ae;">{{item.subject}}</h5>
+	<h2 *ngIf="item.status==0" id="contenuMessage-heading1"
+		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h2>
+	<h2 *ngIf="item.status==1" id="contenuMessage-heading1"
+		style="color: #0078ae;">{{item.subject}}</h2>
 	<div [innerHTML]="item.shortMessage"></div>
 	</ion-item> <ion-item-options side="right">
 	<button ion-button color="danger" (click)="deleteMessage(item)">
@@ -62,10 +62,10 @@
 		src="{{url}}/assets/images/user/{{item.recipient.pic}}" alt="" /> <font
 		size="1" color="gray">{{item.sender.firstName +' '+item.sender.lastName}} <br /> {{item.createDate| date:'dd/MM/yy'}}
 	</font></ion-avatar>
-	<h3 *ngIf="item.status==0" id="contenuMessage-heading1"
-		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h3>
-	<h5 *ngIf="item.status==1" id="contenuMessage-heading1"
-		style="color: #0078ae;">{{item.subject}}</h5>
+	<h2 *ngIf="item.status==0" id="contenuMessage-heading1"
+		style="color: #0078ae; font-weight:bold;">{{item.subject}}</h2>
+	<h2 *ngIf="item.status==1" id="contenuMessage-heading1"
+		style="color: #0078ae;">{{item.subject}}</h2>
 	<div [innerHTML]="item.shortMessage"></div>
 	</ion-item> <ion-item-options side="right">
 	<button ion-button color="danger" (click)="deleteMessage(item)">

@@ -20,7 +20,27 @@
     </ion-item>
 
   </form>
-  <ion-list>
+  
+  
+  <div padding>
+  
+	<ion-segment [(ngModel)]="msgType"> 
+		
+	<ion-segment-button
+		value="1">Moyennes<ion-badge color="danger" *ngIf="termResult.resultSummaries">{{termResult.resultSummaries.length}}</ion-badge> 
+	</ion-segment-button> 		
+	<ion-segment-button
+		value="2">Notes<ion-badge color="danger" *ngIf="marks">{{marks.length}}</ion-badge>
+	</ion-segment-button> 
+	
+	</ion-segment>
+	
+</div>
+ 
+ <div [ngSwitch]="msgType">
+
+<ion-list *ngSwitchCase="'1'">
+ 
   <ion-item *ngFor="let resultSummary of termResult.resultSummaries" (click)="getAverages(resultSummary)">
     <ion-avatar item-start>
       <ion-badge color="secondary" *ngIf="resultSummary.mark>=10">{{resultSummary.decision}}</ion-badge>
@@ -34,6 +54,29 @@
     <p>Rang: {{resultSummary.rankNbr}}</p>
     <ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 
   </ion-item>
+ 
 </ion-list>
+
+
+<ion-list *ngSwitchCase="'2'"> 
+	  <ion-item *ngFor="let mark of marks">
+    <ion-avatar item-start>
+     <ion-badge color="primary"> {{mark.examDate| date:'dd/MM/yy' }} </ion-badge>      
+    </ion-avatar>
+    <h2>{{mark.subject}}</h2>
+    <h3>note: 
+      <ion-badge color="secondary" *ngIf="mark.mark*20/mark.maxMark>=10">{{mark.mark| number : '1.2-2' }}/{{mark.maxMark}}</ion-badge> 
+      <ion-badge color="secondary" *ngIf="mark.mark*20/mark.maxMark>=10">{{mark.grade}}</ion-badge>
+      <ion-badge color="danger" *ngIf="mark.mark*20/mark.maxMark<10">{{mark.mark| number : '1.2-2' }}/{{mark.maxMark}}</ion-badge>  
+      <ion-badge color="danger" *ngIf="mark.mark*20/mark.maxMark<10">{{mark.grade}}</ion-badge>
+    </h3>
+    <p>{{mark.term}}</p>
+    <p>{{mark.examType}} - {{mark.ratio}}%</p>
+  </ion-item>
+ </ion-list>
+
+</div> 
+  
+
  
 </ion-content>

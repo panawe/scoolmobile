@@ -5,10 +5,12 @@
 <ion-title> Mes Enfants </ion-title> </ion-navbar> </ion-header>
 <ion-content padding id="page3">  
 <ion-list>
-  <ion-item (click)="goToContenuNotes(student)" *ngFor="let student of children">
+  <ion-item (click)="goToContenuNotes(student)" *ngFor="let student of children" text-wrap>
+     <ion-avatar item-start>
     <ion-thumbnail item-start>
       <img src="{{url}}/assets/images/user/{{student.pic}}" alt="" />
     </ion-thumbnail>
+    </ion-avatar>
     <h2>{{student.firstName +'	'+student.lastName}}</h2>
     <p>{{student.userName}}</p>
      <ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 

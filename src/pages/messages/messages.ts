@@ -17,7 +17,7 @@ export class MessagesPage {
   sentMsgs: SDMessage[];
   receivedMsgs: SDMessage[];
   msgCounts: number[];
-  msgType: number;
+  msgType: number=1;
   user: User = JSON.parse(Cookie.get('loggedInUser'));
   url: string = Constants.apiServer;
   constructor(public navCtrl: NavController, private baseService: BaseService) {

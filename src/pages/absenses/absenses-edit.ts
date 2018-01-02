@@ -8,6 +8,7 @@ import {TimePeriod} from "../../app/models/timePeriod";
 import {User} from '../../app/models/user';
 import {BaseService} from '../../app/services/base.service';
 import {SchoolingService} from '../../app/services/schooling.service';
+import { AbsensesDetailsPage } from "./absensesDetails";
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Cookie} from 'ng2-cookies';
@@ -110,5 +111,23 @@ export class AbsensesEditPage {
       schoolingView.year = this.schooling.schoolYear.year;
 
     return schoolingView;
+  }
+  
+    public goToSchooling(schoolingId: number) {
+    let schooling: Schooling;
+    this.schoolingService.getById(schoolingId)
+      .subscribe((data: Schooling) => {
+
+        schooling = data
+        if (schooling && schooling !== undefined && schooling.eventDate !== null) {
+          schooling.eventDate = new Date(schooling.eventDate);
+        }
+        this.navCtrl.push(AbsensesDetailsPage, {
+          schooling: schooling
+        });
+      },
+      error => console.log(error),
+      () => console.log('Get schooling complete'));
+
   }
 }

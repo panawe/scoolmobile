@@ -1,0 +1,82 @@
+<ion-header> <ion-navbar>
+<button ion-button menuToggle>
+	<ion-icon name="menu"></ion-icon>
+</button>
+<ion-title> Notes </ion-title> </ion-navbar> </ion-header>
+<ion-content padding id="page2"> 
+
+  <form id="notes-form3">  
+    <ion-item id="notes-select1">
+      <ion-label>
+        Trimestre
+      </ion-label>
+     <ion-select [(ngModel)]="exam.term" multiple="false" name="term"> 
+       <ion-option *ngFor="let aTerm of terms" [value]="aTerm">{{aTerm.name}}</ion-option>
+    </ion-select>
+    </ion-item>
+    
+    <ion-item id="notes-select2">
+      <ion-label>
+        Matiere
+      </ion-label>
+     <ion-select [(ngModel)]="exam.course.subject" multiple="false" name="subject"> 
+       <ion-option *ngFor="let aSubject of subjects" [value]="aSubject">{{aSubject.name}}</ion-option>
+    </ion-select>
+    </ion-item>
+    
+    <ion-item id="notes-select3">
+      <ion-label>
+        classe
+      </ion-label>
+     <ion-select [(ngModel)]="exam.course.classe" multiple="false" name="classe"> 
+       <ion-option *ngFor="let aClass of classes" [value]="aClass">{{aClass.name}}</ion-option>
+    </ion-select>
+    </ion-item>
+    
+    <ion-item id="notes-select4">
+      <ion-label>
+        Type d'examen
+      </ion-label>
+     <ion-select [(ngModel)]="exam.examType" multiple="false" name="examType"> 
+       <ion-option *ngFor="let aExamType of examTypes" [value]="aExamType">{{aExamType.name}}</ion-option>
+    </ion-select>
+    </ion-item>
+    
+     <ion-item>
+    <ion-label>Description</ion-label>
+    <ion-input type="text"  [(ngModel)]="exam.name" name="examDesc"></ion-input>
+  </ion-item>
+  
+   <ion-item>
+    <ion-label>Note sur</ion-label>
+    <ion-input type="text"  [(ngModel)]="exam.maxMark" name="MaxMak"></ion-input>
+  </ion-item>
+  
+   <ion-item>
+    <ion-label>Compte pour %</ion-label>
+    <ion-input type="text" [(ngModel)]="exam.ratio" name="ratio"></ion-input>
+  </ion-item>
+  
+<ion-list radio-group [(ngModel)]="exam.evaluationType" name ="evalType">
+  <ion-list-header>
+    Type de note
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Note de Classe</ion-label>
+    <ion-radio checked="true" value="0"  ></ion-radio>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Note d'Examen</ion-label>
+    <ion-radio value="1" ></ion-radio>
+  </ion-item>
+</ion-list>
+  
+	<button ion-button color="primary" (click)="save()">Sauvegarder</button>  
+
+</form>
+
+<button ion-button color="danger" *ngIf="error">{{error}}</button>
+
+ </ion-content>

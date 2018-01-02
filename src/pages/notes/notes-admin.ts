@@ -4,6 +4,7 @@ import {ExamService} from '../../app/services/exam.service';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {NotesEditPage} from './notes-edit'; 
+import { NotesEditMainPage } from "./notes-edit-main";
 
 @Component({
   selector: 'page-notes-admin',
@@ -39,5 +40,8 @@ export class NotesAdminPage {
     });
   }
 
-
+  newExam(){
+      this.navCtrl.push(NotesEditMainPage, { 
+    });
+  }
 }

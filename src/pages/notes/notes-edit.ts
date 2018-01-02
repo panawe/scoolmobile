@@ -1,6 +1,7 @@
 import {Constants} from "../../app/app.constants";
 import {Exam} from "../../app/models/exam";
 import {MarkView} from "../../app/models/markView";
+import {Teacher} from "../../app/models/teacher";
 import {ExamService} from '../../app/services/exam.service';
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
@@ -15,6 +16,7 @@ export class NotesEditPage {
   public marks: MarkView[];
   searchText: string;
   public error: string;
+  msg: string;
   color: string = 'primary';
   icon: string = 'checkmark-circle';
   url: string = Constants.apiServer;
@@ -23,9 +25,18 @@ export class NotesEditPage {
     private examService: ExamService,
     public navParams: NavParams) {
     this.exam = navParams.get('exam');
-    this.examService.getMarks(this.exam).subscribe((data: MarkView[]) => {this.marks = data;},
-      error => console.log(error),
-      () => console.log('Get marks'));
+    if (this.exam == null) {
+      this.exam = new Exam();
+    } else {
+      this.examService.getMarks(this.exam).subscribe((data: MarkView[]) => {this.marks = data;},
+        error => console.log(error),
+        () => console.log('Get marks'));
+
+      if (this.exam.course.teacher == null) {
+        this.exam.course.teacher = new Teacher();
+      }
+    }
+
   }
 
   public saveMark(aMark: MarkView) {
@@ -56,6 +67,28 @@ export class NotesEditPage {
       },
         error => console.log(error),
         () => console.log('Save Mark'));
+  }
+  
+  publish(){
+      try {
+      this.error = '';
+      this.msg='';
+      this.exam.modifiedBy = this.loggedInUser.id;
+      this.exam.publishMarks=true;
+      this.examService.save(this.exam)
+        .subscribe(result => {
+          if (result.id > 0) {
+            this.exam = result; 
+            this.msg=Constants.GRADE_PUBLISHED;
+          }
+          else {
+            this.error = result.error;
+          }
+        })
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 
 }

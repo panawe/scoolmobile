@@ -11,7 +11,7 @@
 <ion-content padding id="page3">
   <ion-list>
   <ion-item (click)="chooseCourse(aCourse)" *ngFor="let aCourse of courses">
-    <h5>{{aCourse.subject.name}}</h5>
+    <h2>{{aCourse.subject.name}}</h2>
     <p>{{aCourse.classe.level.name +' - '+aCourse.classe.name}}</p>
      <ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 
   </ion-item>  
