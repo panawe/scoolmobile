@@ -41,7 +41,7 @@
 
 <ion-list *ngSwitchCase="'1'">
  
-  <ion-item *ngFor="let resultSummary of termResult.resultSummaries" (click)="getAverages(resultSummary)">
+  <ion-item *ngFor="let resultSummary of termResult.resultSummaries" (click)="getAverages(resultSummary)" text-wrap>
     <ion-avatar item-start>
       <ion-badge color="secondary" *ngIf="resultSummary.mark>=10">{{resultSummary.decision}}</ion-badge>
       <ion-badge color="danger" *ngIf="resultSummary.mark<10">{{resultSummary.decision}}</ion-badge>
@@ -59,7 +59,7 @@
 
 
 <ion-list *ngSwitchCase="'2'"> 
-	  <ion-item *ngFor="let mark of marks">
+	  <ion-item *ngFor="let mark of marks" text-wrap>
     <ion-avatar item-start>
      <ion-badge color="primary"> {{mark.examDate| date:'dd/MM/yy' }} </ion-badge>      
     </ion-avatar>
