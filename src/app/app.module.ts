@@ -39,6 +39,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ChartModule, ToggleButtonModule }         from 'primeng/primeng';
 import { PayementsAdminDtlPage } from "../pages/payements/payements-admin-dtl";
 import { PayementsDtlPage } from '../pages/payements/payements-dtl';
+import { NotesDtlPage } from '../pages/notes/notes-dtl';
 @NgModule({
   declarations: [
     MyApp,
@@ -65,7 +66,7 @@ import { PayementsDtlPage } from '../pages/payements/payements-dtl';
     ConfigurationPage,
     AbsensesDetailsPage,
     PayementsAdminDtlPage,
-    PayementsDtlPage
+    PayementsDtlPage, NotesDtlPage
   ],
   imports: [
      ChartModule,ToggleButtonModule,BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
@@ -100,7 +101,7 @@ import { PayementsDtlPage } from '../pages/payements/payements-dtl';
     ConfigurationPage,
     AbsensesDetailsPage,
     PayementsAdminDtlPage,
-    PayementsDtlPage
+    PayementsDtlPage, NotesDtlPage
   ],
   providers: [
     StatusBar,

@@ -16,10 +16,10 @@ import {ViewChild} from '@angular/core';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Component({
-  selector: 'page-notes',
-  templateUrl: 'notes.html'
+  selector: 'page-notes-dtl',
+  templateUrl: 'notes-dtl.html'
 })
-export class NotesPage {
+export class NotesDtlPage {
   year: SchoolYear;
   years: SchoolYear[];
   public marks: MarkView[] = [];
@@ -82,6 +82,7 @@ export class NotesPage {
   public getAverages(resultSummary: ResultSummaryView) {
     this.examService.getAverages(resultSummary)
       .subscribe((data: ResultSummaryView) => {
+
         this.navCtrl.push(MatierePage, {
           resultSummary: data
         });
