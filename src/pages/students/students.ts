@@ -12,7 +12,7 @@ import {TabMenuPage} from '../tab-menu/tab-menu';
 export class StudentsPage {
   public error: string;
   public children: User[] = [];
-  url: string = Constants.apiServer;
+  url: string = Constants.webServer;
   constructor(public navCtrl: NavController,
     private userService: UserService) {
     const user: User = JSON.parse(Cookie.get('loggedInUser'));

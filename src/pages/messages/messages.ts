@@ -19,7 +19,7 @@ export class MessagesPage {
   msgCounts: number[];
   msgType: number=1;
   user: User = JSON.parse(Cookie.get('loggedInUser'));
-  url: string = Constants.apiServer;
+  url: string = Constants.webServer;
   constructor(public navCtrl: NavController, private baseService: BaseService) {
     this.initializeItems();
   }
@@ -40,22 +40,22 @@ export class MessagesPage {
 
   initializeItems() {
     //const user: User = JSON.parse(Cookie.get('user'));
-    this.baseService.getUserSDMessages(this.user.id, 30, 1)
+    this.baseService.getUserSDMessages(this.user.id, 3650, 1)
       .subscribe((data: SDMessage[]) => this.alerts = data,
       error => console.log(error),
       () => console.log('Get All Alerts Complete'));
 
-    this.baseService.getUserSDMessages(this.user.id, 30, 2)
+    this.baseService.getUserSDMessages(this.user.id, 3650, 2)
       .subscribe((data: SDMessage[]) => this.receivedMsgs = data,
       error => console.log(error),
       () => console.log('Get All User SD Messages Complete'));
 
-    this.baseService.getSentSDMessages(this.user.id, 30)
+    this.baseService.getSentSDMessages(this.user.id, 3650)
       .subscribe((data: SDMessage[]) => this.sentMsgs = data,
       error => console.log(error),
       () => console.log('Get All Sent Messages Complete'));
 
-    this.baseService.countSDMessagesByType(this.user.id, 30)
+    this.baseService.countSDMessagesByType(this.user.id, 3650)
       .subscribe((data: number[]) => {
         this.msgCounts = data;
       },
@@ -123,17 +123,17 @@ export class MessagesPage {
     } else {
 
       if (this.msgType == 1) {
-        this.baseService.getUserSDMessages(this.user.id, 30, 1)
+        this.baseService.getUserSDMessages(this.user.id, 3650, 1)
           .subscribe((data: SDMessage[]) => this.alerts = data,
           error => console.log(error),
           () => console.log('Get All Alerts Complete'));
       } else if (this.msgType == 2) {
-        this.baseService.getUserSDMessages(this.user.id, 30, 2)
+        this.baseService.getUserSDMessages(this.user.id, 3650, 2)
           .subscribe((data: SDMessage[]) => this.receivedMsgs = data,
           error => console.log(error),
           () => console.log('Get All User SD Messages Complete'));
       } else if (this.msgType == 3) {
-        this.baseService.getSentSDMessages(this.user.id, 30)
+        this.baseService.getSentSDMessages(this.user.id, 3650)
           .subscribe((data: SDMessage[]) => this.sentMsgs = data,
           error => console.log(error),
           () => console.log('Get All Sent Messages Complete'));

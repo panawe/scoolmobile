@@ -10,7 +10,7 @@ import {UserService} from '../../app/services/user.service';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
-  url: string = Constants.apiServer;
+  url: string = Constants.webServer;
   error: string;
   msg: string;
   user: User;

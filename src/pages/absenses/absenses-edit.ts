@@ -25,7 +25,7 @@ export class AbsensesEditPage {
   eventTypes: EventType[];
   schooling: Schooling = new Schooling();
   currentUser: User = JSON.parse(Cookie.get('user'));
-  url: string = Constants.apiServer;
+  url: string = Constants.webServer;
   error: string;
   msg: string;
   constructor(public navCtrl: NavController,

@@ -9,7 +9,7 @@ import {NavController, NavParams} from 'ionic-angular';
 })
 export class ContenuMessagePage {
   message: SDMessage = new SDMessage();
-  url: string = Constants.apiServer;
+  url: string = Constants.webServer;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.message = navParams.get('message');
   }

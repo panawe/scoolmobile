@@ -20,7 +20,6 @@ export class UserService {
 
   public getById = (user: User): Observable<User> => {
     this.actionUrl = Constants.apiServer + '/service/user/user/' + user.id;
-
     return this.http.get(this.actionUrl)
       .map((response: Response) => <User>response.json())
       .catch(this.handleError);

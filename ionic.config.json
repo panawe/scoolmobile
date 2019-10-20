@@ -1,8 +1,7 @@
 {
-  "name": "scoolmobile",
-  "app_id": "4326a051",
-  "type": "ionic-angular",
+  "name": "ScoolDay",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular"
 }

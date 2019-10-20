@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core'; 
+import { Injectable } from '@angular/core';
 @Injectable()
 export class Constants {
-  public static apiServer: string = "http://localhost:8080/ipnetuniversity";
-  //public static apiServer: string = "http://www.scoolday.com";
+  //public static apiServer: string = "http://localhost:8080/ipnetuniversity";
+  public static apiServer: string = "http://www.scoolday.com";
+  public static webServer: string = "http://www.scoolday.com"; 
   public static ABSENCES: string = "Absenses";
   public static ACTIF = "Active";
   public static ACTIVE = "Active?";
@@ -199,6 +200,6 @@ export class Constants {
   public static LOCALE = "fr-FR";
   public static DOCUMENT_TYPE = "Type de Document";
   public static ASSIGN_LABEL: string = "Assigner";
-  public static ADD_COMMENT: string = "Commenter"; 
-  public static GRADE_PUBLISHED="Les notes ont ete publiees."
+  public static ADD_COMMENT: string = "Commenter";
+  public static GRADE_PUBLISHED = "Les notes ont ete publiees."
 }

@@ -19,7 +19,7 @@ export class NotesEditPage {
   msg: string;
   color: string = 'primary';
   icon: string = 'checkmark-circle';
-  url: string = Constants.apiServer;
+  url: string = Constants.webServer;
   loggedInUser = JSON.parse(Cookie.get('loggedInUser'));
   constructor(public navCtrl: NavController,
     private examService: ExamService,

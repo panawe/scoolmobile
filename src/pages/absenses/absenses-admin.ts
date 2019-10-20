@@ -9,7 +9,7 @@ import {AbsensesEditPage} from "./absenses-edit";
   templateUrl: 'absenses-admin.html'
 })
 export class AbsensesAdminPage {
-  url: string = Constants.apiServer;
+  url: string = Constants.webServer;
   public users: User[];
   public searchText: string;
   public error: string;

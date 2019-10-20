@@ -37,6 +37,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ChartModule, ToggleButtonModule }         from 'primeng/primeng';
+import { PayementsAdminDtlPage } from "../pages/payements/payements-admin-dtl";
+import { PayementsDtlPage } from '../pages/payements/payements-dtl';
 @NgModule({
   declarations: [
     MyApp,
@@ -61,7 +63,9 @@ import { ChartModule, ToggleButtonModule }         from 'primeng/primeng';
     MatierePage,StudentsPage,
     ContenuMessagePage,
     ConfigurationPage,
-    AbsensesDetailsPage
+    AbsensesDetailsPage,
+    PayementsAdminDtlPage,
+    PayementsDtlPage
   ],
   imports: [
      ChartModule,ToggleButtonModule,BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
@@ -94,7 +98,9 @@ import { ChartModule, ToggleButtonModule }         from 'primeng/primeng';
     MatierePage,StudentsPage,
     ContenuMessagePage,
     ConfigurationPage,
-    AbsensesDetailsPage
+    AbsensesDetailsPage,
+    PayementsAdminDtlPage,
+    PayementsDtlPage
   ],
   providers: [
     StatusBar,
