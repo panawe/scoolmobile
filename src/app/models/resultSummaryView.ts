@@ -15,7 +15,7 @@ export class ResultSummaryView {
   summaryId: number;
   studentId: number;
   classId: number;
-  term: string;
+  term: string; 
   averages: AverageView[];
   childSummaries: ResultSummaryView[];
 }

@@ -8,75 +8,15 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page2">
-  <form id="notes-form3">
-    <ion-item id="notes-select1">
-      <ion-label>
-        Annee
-      </ion-label>
-     <ion-select [(ngModel)]="year" multiple="false" name="year" (ionChange)="getStudentTermResults()"> 
-       <ion-option *ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
-    </ion-select>
+<ion-content padding id="page3">
+  <ion-list>
+    <ion-item *ngFor="let yd of yearDatas" (click)="getYearMarks(yd)">
+      <h2><strong>{{yd.year.year}}</strong></h2>
+      <h2>Nombre de notes: <ion-badge color="secondary">{{yd.dim1 |number :'1.0-2'}}</ion-badge></h2>    
+      <h2>Note minimum: <ion-badge color="secondary">{{yd.dim2|number :'1.0-2'}}/20</ion-badge></h2>
+      <h2>Note Maximale: <ion-badge color="secondary">{{yd.dim3|number :'1.0-2'}}/20</ion-badge></h2>
+      <h2>Moyenne(non ponderee): <ion-badge color="secondary">{{yd.dim4|number :'1.0-2'}}/20</ion-badge></h2>
+      <ion-icon clear item-end name="arrow-dropright-circle"></ion-icon>
     </ion-item>
-
-  </form>
-  
-  
-  <div padding>
-  
-	<ion-segment [(ngModel)]="msgType"> 
-		
-	<ion-segment-button
-		value="1">Moyennes<ion-badge color="danger" *ngIf="termResult.resultSummaries">{{termResult.resultSummaries.length}}</ion-badge> 
-	</ion-segment-button> 		
-	<ion-segment-button
-		value="2">Notes<ion-badge color="danger" *ngIf="marks">{{marks.length}}</ion-badge>
-	</ion-segment-button> 
-	
-	</ion-segment>
-	
-</div>
- 
- <div [ngSwitch]="msgType">
-
-<ion-list *ngSwitchCase="'1'">
- 
-  <ion-item *ngFor="let resultSummary of termResult.resultSummaries" (click)="getAverages(resultSummary)" text-wrap>
-    <ion-avatar item-start>
-      <ion-badge color="secondary" *ngIf="resultSummary.mark>=10">{{resultSummary.decision}}</ion-badge>
-      <ion-badge color="danger" *ngIf="resultSummary.mark<10">{{resultSummary.decision}}</ion-badge>
-    </ion-avatar>
-    <h2>{{resultSummary.term}}</h2>
-    <h3>Note: {{resultSummary.mark| number : '1.2-2' }} - 
-          <ion-badge color="secondary" *ngIf="resultSummary.mark>=10">{{resultSummary.gradeName}}</ion-badge>
-      <ion-badge color="danger" *ngIf="resultSummary.mark<10">{{resultSummary.gradeName}}</ion-badge>    
-    </h3>
-    <p>Rang: {{resultSummary.rankNbr}}</p>
-    <ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 
-  </ion-item>
- 
-</ion-list>
-
-
-<ion-list *ngSwitchCase="'2'"> 
-	  <ion-item *ngFor="let mark of marks" text-wrap>
-    <ion-avatar item-start>
-     <ion-badge color="primary"> {{mark.examDate| date:'dd/MM/yy' }} </ion-badge>      
-    </ion-avatar>
-    <h2>{{mark.subject}}</h2>
-    <h3>note: 
-      <ion-badge color="secondary" *ngIf="mark.mark*20/mark.maxMark>=10">{{mark.mark| number : '1.2-2' }}/{{mark.maxMark}}</ion-badge> 
-      <ion-badge color="secondary" *ngIf="mark.mark*20/mark.maxMark>=10">{{mark.grade}}</ion-badge>
-      <ion-badge color="danger" *ngIf="mark.mark*20/mark.maxMark<10">{{mark.mark| number : '1.2-2' }}/{{mark.maxMark}}</ion-badge>  
-      <ion-badge color="danger" *ngIf="mark.mark*20/mark.maxMark<10">{{mark.grade}}</ion-badge>
-    </h3>
-    <p>{{mark.term}}</p>
-    <p>{{mark.examType}} - {{mark.ratio}}%</p>
-  </ion-item>
- </ion-list>
-
-</div> 
-  
-
- 
+  </ion-list>
 </ion-content>

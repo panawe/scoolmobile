@@ -1,22 +1,18 @@
-<ion-header> <ion-navbar>
-<button ion-button menuToggle>
-	<ion-icon name="menu"></ion-icon>
-</button>
-<ion-title> Absenses </ion-title> </ion-navbar> </ion-header>
-<ion-content padding id="page5">
-<form id="absenses-form5">
-	<ion-item id="absenses-select4"> <ion-label>
-	Annee </ion-label> <ion-select [(ngModel)]="year" multiple="false" name="year"
-		(ionChange)="getUserSchoolings()"> <ion-option
-		*ngFor="let aYear of years" [value]="aYear">{{aYear.year}}</ion-option>
-	</ion-select> </ion-item>
-</form>
-
-<ion-list> <ion-item *ngFor="let schooling of schoolings"
-	(click)="goToSchooling(schooling.id)"> <ion-avatar
-	item-start> <ion-badge color="primary">{{schooling.eventDate
-| date:'dd/MM/yy' }}</ion-badge> </ion-avatar>
-<h2>{{schooling.eventType}}</h2> 
-<p>{{schooling.description}}</p>
-<ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 
-</ion-item> </ion-list> </ion-content>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> Absenses & Retards </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page3">
+  <ion-list>
+    <ion-item *ngFor="let yd of yearDatas" (click)="getYearAttendance(yd)">
+      <h2><strong>{{yd.year.year}}</strong></h2>
+      <h2>Nombre d'absenses & retards: <ion-badge color="danger">{{yd.dim1 |number :'1.0-2'}}</ion-badge>
+      </h2>
+      <ion-icon clear item-end name="arrow-dropright-circle"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

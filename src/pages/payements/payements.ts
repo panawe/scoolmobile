@@ -25,7 +25,7 @@ export class PayementsPage {
 
   getYearTuitions(data) {
     this.navCtrl.push(PayementsDtlPage, {
-      yearData: data
+      yearData1: data
     });
   }
 

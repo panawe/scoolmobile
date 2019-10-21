@@ -15,6 +15,7 @@ export class MarkView {
   examType: string;
   subject: string;
   term: string;
+  termDesc: string;
   ratio: number;
   className:string;
   examDate:Date;

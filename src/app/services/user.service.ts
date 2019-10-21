@@ -5,9 +5,9 @@ import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { StudentView } from '../models/studentView';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
- 
+
 @Injectable()
-export class UserService {  
+export class UserService {
 
   private actionUrl: string;
   private headers: Headers;
@@ -24,7 +24,7 @@ export class UserService {
       .map((response: Response) => <User>response.json())
       .catch(this.handleError);
   }
- 
+
   public getAll = (): Observable<User[]> => {
     this.actionUrl = Constants.apiServer + '/service/user/getUsers';
 
@@ -32,9 +32,9 @@ export class UserService {
       .map((response: Response) => <User[]>response.json())
       .catch(this.handleError);
   }
- 
 
- public search = (searchText: string): Observable<User[]> => {
+
+  public search = (searchText: string): Observable<User[]> => {
     let toAdd = JSON.stringify(searchText);
     let actionUrl = Constants.apiServer + '/service/user/findMembers';
     return this.http.post(actionUrl, toAdd, { headers: this.headers })
@@ -53,7 +53,7 @@ export class UserService {
       })
       .catch(this.handleError);
   }
-  
+
   public getUsersByParent = (parentId: number): Observable<User[]> => {
     let toAdd = JSON.stringify(parentId);
     let actionUrl = Constants.apiServer + '/service/user/getUsersByParentId';
@@ -62,8 +62,8 @@ export class UserService {
         return <User[]>response.json();
       })
       .catch(this.handleError);
-  } 
-  
+  }
+
   public getUsersLightByParent = (parentId: number): Observable<User[]> => {
     let toAdd = JSON.stringify(parentId);
     let actionUrl = Constants.apiServer + '/service/user/getUsersLightByParentId';
@@ -72,9 +72,9 @@ export class UserService {
         return <User[]>response.json();
       })
       .catch(this.handleError);
-  } 
-  
- public getStudentUsersByParent = (parentId: number): Observable<StudentView[]> => {
+  }
+
+  public getStudentUsersByParent = (parentId: number): Observable<StudentView[]> => {
     let toAdd = JSON.stringify(parentId);
     let actionUrl = Constants.apiServer + '/service/user/getStudentsByParentId';
     return this.http.post(actionUrl, toAdd, { headers: this.headers })
@@ -82,9 +82,9 @@ export class UserService {
         return <User[]>response.json();
       })
       .catch(this.handleError);
-  } 
-  
-  
+  }
+
+
   public login = (user: User): Observable<Boolean> => {
     let toAdd = JSON.stringify(user);
     let actionUrl = Constants.apiServer + '/service/user/login';
@@ -95,9 +95,11 @@ export class UserService {
         if (response && response.json()) {
           let token = response.json() && response.json().token;
           if (token) {
-
-            Cookie.set('user', JSON.stringify(response.json()));
-            Cookie.set('loggedInUser', JSON.stringify(response.json()));
+            let u: User = response.json();
+            u.firstName = encodeURIComponent(u.firstName);
+            u.lastName = encodeURIComponent(u.lastName);
+            Cookie.set('user',  JSON.stringify(u));
+            Cookie.set('loggedInUser', JSON.stringify(u));
             return true;
           } else {
             return false;
@@ -117,7 +119,7 @@ export class UserService {
 
     return this.http.post(actionUrl, toAdd, { headers: this.headers })
       .map((response: Response) => {
-        if (response && response.json()) { 
+        if (response && response.json()) {
           return response.json();
         }
       })
@@ -179,7 +181,7 @@ export class UserService {
         } else {
           return false;
         }
-      }) 
+      })
       .catch(this.handleError);
   }
 

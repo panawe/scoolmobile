@@ -42,7 +42,7 @@ export class TabMenuPage {
   }
 
   initializeItems() {
-    this.baseService.countSDMessages(this.user.id, 30)
+    this.baseService.countSDMessages(this.user.id, 3650)
       .subscribe((data: number) => this.newMsgCount = data,
       error => console.log(error),
       () => console.log('Get All User SD Messages count Complete'));

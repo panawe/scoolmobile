@@ -45,7 +45,20 @@ export class BaseService {
       .map((response: Response) => <YearData[]>response.json())
       .catch(this.handleError);
   }
- 
+
+  public getYearMarks = (id: number): Observable<YearData[]> => {
+    const actionUrl = Constants.apiServer + '/service/base/getYearMarks/' + id;
+    return this.http.get(actionUrl)
+      .map((response: Response) => <YearData[]>response.json())
+      .catch(this.handleError);
+  }
+
+  public getYearAttendance = (id: number): Observable<YearData[]> => {
+    const actionUrl = Constants.apiServer + '/service/base/getYearAttendance/' + id;
+    return this.http.get(actionUrl)
+      .map((response: Response) => <YearData[]>response.json())
+      .catch(this.handleError);
+  }
 
   public getAllSubjects = (): Observable<Subject[]> => {
     const actionUrl = Constants.apiServer + '/service/subject/getAll';

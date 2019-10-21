@@ -35,7 +35,12 @@ export class StudentsPage {
   }
 
   goToContenuNotes(student: User) {
+    console.log(student);
+    //student.firstName= student.firstName.replace('-',' ');
+    //student.lastName= student.lastName.replace('-',' ');
+    //console.log(student);
     Cookie.set('user', JSON.stringify(student));
+    console.log('Added to cookie');
     this.navCtrl.setRoot(TabMenuPage);
   }
 }

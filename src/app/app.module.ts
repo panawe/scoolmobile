@@ -40,6 +40,7 @@ import { ChartModule, ToggleButtonModule }         from 'primeng/primeng';
 import { PayementsAdminDtlPage } from "../pages/payements/payements-admin-dtl";
 import { PayementsDtlPage } from '../pages/payements/payements-dtl';
 import { NotesDtlPage } from '../pages/notes/notes-dtl';
+import { AbsensesDtlPage } from '../pages/absenses/absenses-dtl';
 @NgModule({
   declarations: [
     MyApp,
@@ -66,7 +67,7 @@ import { NotesDtlPage } from '../pages/notes/notes-dtl';
     ConfigurationPage,
     AbsensesDetailsPage,
     PayementsAdminDtlPage,
-    PayementsDtlPage, NotesDtlPage
+    PayementsDtlPage, NotesDtlPage,AbsensesDtlPage
   ],
   imports: [
      ChartModule,ToggleButtonModule,BrowserModule, CommonSharedModule,IonicStorageModule.forRoot({
@@ -101,7 +102,7 @@ import { NotesDtlPage } from '../pages/notes/notes-dtl';
     ConfigurationPage,
     AbsensesDetailsPage,
     PayementsAdminDtlPage,
-    PayementsDtlPage, NotesDtlPage
+    PayementsDtlPage, NotesDtlPage, AbsensesDtlPage
   ],
   providers: [
     StatusBar,

@@ -1,17 +1,20 @@
-import {Constants} from '../../app/app.constants';
-import {EventType} from "../../app/models/eventType";
-import {SchoolYear} from '../../app/models/schoolYear';
-import {Schooling} from '../../app/models/schooling';
-import {SchoolingView} from "../../app/models/schoolingView";
-import {Student} from "../../app/models/student";
-import {TimePeriod} from "../../app/models/timePeriod";
-import {User} from '../../app/models/user';
-import {BaseService} from '../../app/services/base.service';
-import {SchoolingService} from '../../app/services/schooling.service';
+import { Constants } from '../../app/app.constants';
+import { EventType } from "../../app/models/eventType";
+import { SchoolYear } from '../../app/models/schoolYear';
+import { Schooling } from '../../app/models/schooling';
+import { SchoolingView } from "../../app/models/schoolingView";
+import { Student } from "../../app/models/student";
+import { TimePeriod } from "../../app/models/timePeriod";
+import { User } from '../../app/models/user';
+import { BaseService } from '../../app/services/base.service';
+import { SchoolingService } from '../../app/services/schooling.service';
 import { AbsensesDetailsPage } from "./absensesDetails";
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Cookie} from 'ng2-cookies';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { Cookie } from 'ng2-cookies';
+import { YearData } from '../../app/models/yearData';
+import { StudentService } from '../../app/services/student.service';
+import { AbsensesDtlPage } from './absenses-dtl';
 
 @Component({
   selector: 'page-absenses-edit',
@@ -20,7 +23,7 @@ import {Cookie} from 'ng2-cookies';
 export class AbsensesEditPage {
   year: SchoolYear;
   user: User;
-  schoolings: SchoolingView[] = [];
+  //schoolings: SchoolingView[] = [];
   timePeriods: TimePeriod[];
   eventTypes: EventType[];
   schooling: Schooling = new Schooling();
@@ -28,40 +31,42 @@ export class AbsensesEditPage {
   url: string = Constants.webServer;
   error: string;
   msg: string;
+  yearDatas: YearData[] = [];
+  public student: Student;
   constructor(public navCtrl: NavController,
-    private baseService: BaseService,
+    private baseService: BaseService, private studentService: StudentService,
     private schoolingService: SchoolingService,
     public navParams: NavParams) {
-
     this.user = navParams.get('student');
+    this.setStudent(this.user);
     this.baseService.getCurrentSchoolYear()
       .subscribe((data: SchoolYear) => {
         this.year = data;
         if (this.year != null) {
           this.schooling.schoolYear = this.year;
-          this.getUserSchoolings();
+          // this.getUserSchoolings();
         }
       },
-      error => console.log(error),
-      () => console.log('Get All SchoolYears Complete'));
+        error => console.log(error),
+        () => console.log('Get All SchoolYears Complete'));
 
     this.baseService.getTimePeriods()
       .subscribe((data: TimePeriod[]) => {
         this.timePeriods = data;
       },
-      error => console.log(error),
-      () => console.log('Get All Time Periods'));
+        error => console.log(error),
+        () => console.log('Get All Time Periods'));
 
     this.baseService.getAllEventTypes()
       .subscribe((data: EventType[]) => this.eventTypes = data,
-      error => console.log(error),
-      () => console.log('Get All EventTypes Complete'));
+        error => console.log(error),
+        () => console.log('Get All EventTypes Complete'));
   }
 
   save() {
     try {
       this.error = '';
-      this.msg='';
+      this.msg = '';
       this.schooling.student = new Student();
       this.schooling.student.user = new User();
       this.schooling.student.user.id = this.user.id;
@@ -70,10 +75,14 @@ export class AbsensesEditPage {
         .subscribe(result => {
           if (result.id > 0) {
             this.schooling = result;
-            var onTheFly: SchoolingView[] = [];
-            onTheFly.push(this.transform());
-            onTheFly.push(...this.schoolings);
-            this.schoolings = onTheFly;
+            this.yearDatas = [];
+            console.log('Getting year data');
+            this.baseService.getYearAttendance(this.student.id)
+              .subscribe((data: YearData[]) => {
+                this.yearDatas = data;
+                console.log(this.yearDatas);
+              }, error => console.log(error),
+                () => console.log('Get getYearAttendance Complete'));
             this.schooling = new Schooling();
             this.msg = Constants.saveSuccess;
           }
@@ -87,16 +96,7 @@ export class AbsensesEditPage {
     }
   }
 
-  public getUserSchoolings() {
-    this.schoolings = [];
-    this.schoolingService.getByStudentAndYear(this.user.id, this.year.id)
-      .subscribe((data: SchoolingView[]) => {
-        this.schoolings = data
-        console.info("Schoolings: " + this.schoolings);
-      },
-      error => console.log(error),
-      () => console.log('Get all Schoolings complete'));
-  }
+
   transform(): SchoolingView {
     let schoolingView = new SchoolingView();
     schoolingView.id = this.schooling.id;
@@ -112,8 +112,8 @@ export class AbsensesEditPage {
 
     return schoolingView;
   }
-  
-    public goToSchooling(schoolingId: number) {
+
+  public goToSchooling(schoolingId: number) {
     let schooling: Schooling;
     this.schoolingService.getById(schoolingId)
       .subscribe((data: Schooling) => {
@@ -126,8 +126,32 @@ export class AbsensesEditPage {
           schooling: schooling
         });
       },
-      error => console.log(error),
-      () => console.log('Get schooling complete'));
+        error => console.log(error),
+        () => console.log('Get schooling complete'));
 
+  }
+
+  public setStudent(aUser: User) {
+    if (aUser != null && aUser.id > 0) {
+      this.studentService.getByUser(aUser)
+        .subscribe(result => {
+          this.student = result;
+          console.log('Getting year data');
+          this.baseService.getYearAttendance(this.student.id)
+            .subscribe((data: YearData[]) => {
+              this.yearDatas = data;
+              console.log(this.yearDatas);
+            }, error => console.log(error),
+              () => console.log('Get getYearAttendance Complete'));
+        });
+
+    }
+  }
+
+  getYearAttendance(data) {
+    this.navCtrl.push(AbsensesDtlPage, {
+      yearData3: data,
+      user:this.user
+    });
   }
 }

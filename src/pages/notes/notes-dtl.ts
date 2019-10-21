@@ -1,19 +1,19 @@
-import {Constants} from '../../app/app.constants';
-import {AverageView} from '../../app/models/averageView';
-import {MarkView} from '../../app/models/markView';
-import {ResultSummaryView} from '../../app/models/resultSummaryView';
-import {SchoolYear} from '../../app/models/schoolYear';
-import {Student} from '../../app/models/student';
-import {TermResultView} from '../../app/models/termResultView';
-import {User} from '../../app/models/user';
-import {BaseService} from '../../app/services/base.service';
-import {ExamService} from '../../app/services/exam.service';
-import {StudentService} from '../../app/services/student.service';
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {MatierePage} from '../matiere/matiere';
-import {ViewChild} from '@angular/core';
-import {Cookie} from 'ng2-cookies/ng2-cookies';
+import { Constants } from '../../app/app.constants';
+import { AverageView } from '../../app/models/averageView';
+import { MarkView } from '../../app/models/markView';
+import { ResultSummaryView } from '../../app/models/resultSummaryView';
+import { SchoolYear } from '../../app/models/schoolYear';
+import { Student } from '../../app/models/student';
+import { TermResultView } from '../../app/models/termResultView';
+import { User } from '../../app/models/user';
+import { ExamService } from '../../app/services/exam.service';
+import { StudentService } from '../../app/services/student.service';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { MatierePage } from '../matiere/matiere';
+import { ViewChild } from '@angular/core';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { YearData } from '../../app/models/yearData';
 
 @Component({
   selector: 'page-notes-dtl',
@@ -30,25 +30,12 @@ export class NotesDtlPage {
   public termResult: TermResultView = new TermResultView();
   public selectedAverage: AverageView = new AverageView();
   constructor(public navCtrl: NavController,
-    private examService: ExamService,
-    private studentService: StudentService,
-    private baseService: BaseService) {
+    private examService: ExamService, public navParams: NavParams,
+    private studentService: StudentService ) {
     const user: User = JSON.parse(Cookie.get('user'));
-    this.setStudent(user);
-    this.baseService.getAllSchoolYears()
-      .subscribe((data: SchoolYear[]) => this.years = data,
-      error => console.log(error),
-      () => console.log('Get All SchoolYears Complete'));
-
-    this.baseService.getCurrentSchoolYear()
-      .subscribe((data: SchoolYear) => {
-        this.year = data;
-        if (this.year != null) {
-          this.getStudentTermResults();
-        }
-      },
-      error => console.log(error),
-      () => console.log('Get getStudentTermResults Complete'));
+    const yd: YearData = navParams.get('yearData2');
+    this.year = yd.year;
+    this.setStudent(user);   
   }
   goToMatiere(params) {
     if (!params) params = {};
@@ -60,6 +47,7 @@ export class NotesDtlPage {
       this.studentService.getByUser(aUser)
         .subscribe(result => {
           this.student = result;
+           this.getStudentTermResults();
         });
 
     }
@@ -88,8 +76,8 @@ export class NotesDtlPage {
         });
 
       },
-      error => console.log(error),
-      () => console.log('Getting Averages'));
+        error => console.log(error),
+        () => console.log('Getting Averages'));
   }
 
   public getStudentTermResults() {
@@ -100,11 +88,11 @@ export class NotesDtlPage {
       this.examService.getStudentYearResults(this.year.id + "," + this.student.id)
         .subscribe((data: TermResultView) => {
           this.termResult = data;
-          if (this.termResult != null && this.termResult.resultSummaries != null && this.termResult.resultSummaries.length > 0){
+          if (this.termResult != null && this.termResult.resultSummaries != null && this.termResult.resultSummaries.length > 0) {
             this.msgType = 1;
-          }else{
+          } else {
             this.msgType = 2;
-          } 
+          }
         });
     } else {
       this.error = Constants.SELECT_YEAR;
