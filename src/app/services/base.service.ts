@@ -185,6 +185,26 @@ export class BaseService {
       .catch(this.handleError);
   }
 
+  public deleteSDMessage = (param: SDMessage): Observable<string> => {
+    let actionUrl = Constants.apiServer + '/service/base/deleteSDMessage';
+    let toAdd = JSON.stringify(param);
+    return this.http.post(actionUrl, toAdd, { headers: this.headers })
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch(this.handleError);
+  }
+
+    public sendSDMessage = (param: SDMessage): Observable<string> => {
+    let actionUrl = Constants.apiServer + '/service/base/sendSDMessage';
+    let toAdd = JSON.stringify(param);
+    return this.http.post(actionUrl, toAdd, { headers: this.headers })
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch(this.handleError);
+  }
+
   public getAvgProgress = (param: number): Observable<string> => {
     let actionUrl = Constants.apiServer + '/service/base/getAvgProgress';
     let toAdd = JSON.stringify(param);

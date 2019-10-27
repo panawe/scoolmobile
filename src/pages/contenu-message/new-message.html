@@ -1,16 +1,100 @@
-<ion-header> <ion-navbar>
-<button ion-button menuToggle>
-	<ion-icon name="menu"></ion-icon>
-</button>
-<ion-title> Contenu Message </ion-title> </ion-navbar> </ion-header>
-<ion-content padding id="page9"> <ion-list> <ion-item text-wrap>
-<ion-avatar item-start> <img
-	src="{{url}}/assets/images/user/{{message.sender.pic}}" alt="" /> <font
-	size="1" color="gray">{{message.sender.firstName +'
-	'+message.sender.lastName}} <br /> {{message.createDate|date:'dd/MM/yy'}}
-</font> </ion-avatar>
-<p>{{message.subject}}</p>
-</ion-item>
-<br/>
-<div [innerHTML]="message.body"></div>
-</ion-list> </ion-content>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> Nouveau Message </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page9">
+  <ion-card *ngIf="showRecipients">
+    <ion-card-header>
+      <button color="danger" ion-button icon-only (click)="closeRecipient()" item-end>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+            <h6 style="color: #0f3a5f;">Recherchez une personne a qui vous voulez envoyer un message</h6>
+          </ion-row>
+          <ion-row>
+            <ion-col col-10>
+              <ion-searchbar id="recherche-search1" [(ngModel)]="searchText" placeholder="{{USER_SEARCH_PARTS}}"
+                name="searchT" #searchT="ngModel"></ion-searchbar>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-fab mini color="Primary" (click)="search()">GO</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-item *ngIf="error" text-wrap>
+          <h3 style="color: #ff0000;"> <strong>{{error}} </strong></h3>
+        </ion-item>
+        <ion-item (click)="selectUser(aUser)" *ngFor="let aUser of users" text-wrap>
+          <ion-avatar item-start>
+            <ion-thumbnail item-start>
+              <img src="{{url}}/assets/images/members/{{aUser.pic}}" alt="" />
+            </ion-thumbnail>
+          </ion-avatar>
+          <h2>{{aUser.firstName +' '+aUser.lastName}}</h2>
+          <h3 *ngIf="aUser.role===1||aUser.role===5" style="color: #32db64;"> <strong>Personnel</strong></h3>
+          <h3 *ngIf="aUser.role===2" style="color: #32db64;"> <strong>Enseignant</strong></h3>
+          <h3 *ngIf="aUser.role===3" style="color: #32db64;"> <strong>Etudiant</strong></h3>
+          <h3 *ngIf="aUser.role===4" style="color: #32db64;"> <strong>Parent</strong></h3>
+          <ion-icon clear item-end name="checkmark-circle-outline"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item id="profile-11">
+      <h2 style="color: #32db64;"> <strong>Destinataire </strong></h2>
+      <button ion-fab mini clear item-end color="primary" (click)="showRecipient()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item text-wrap *ngIf="message.recipients">
+      <button *ngFor="let aUser of message.recipients" color="primary" ion-button outline item-start icon-start
+        (click)="removeRecipient(aUser)">
+        <strong>
+          {{aUser.firstName +' '+aUser.lastName}} </strong>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-item>
+    <form id="details-form10">
+      <ion-list id="profile-list3">
+        <ion-item id="profile-input8">
+          <ion-label>
+            <h2 style="color: #32db64;"> <strong>Sujet </strong></h2>
+          </ion-label>
+          <ion-input type="text" placeholder="" name="subject" [(ngModel)]="message.subject"></ion-input>
+        </ion-item>
+        <ion-item id="profile-1">
+          <h2 style="color: #32db64;"> <strong>Message </strong></h2>
+        </ion-item>
+        <ion-item id="profile-img">
+          <ion-textarea placeholder="Saisissez le message ici" [(ngModel)]="message.body" name="message" rows="4">
+          </ion-textarea>
+        </ion-item>
+        <ion-item id="details-checkbox2">
+          <ion-label>
+            <h2 style="color: #32db64;"> <strong>E-mail aussi? </strong></h2>
+          </ion-label>
+          <ion-checkbox [(ngModel)]="message.sendMail" name="sendMail"></ion-checkbox>
+        </ion-item>
+        <ion-item *ngIf="error" text-wrap>
+          <h3 style="color: #ff0000;"> <strong>{{error}} </strong></h3>
+        </ion-item>
+        <ion-item *ngIf="msg" text-wrap>
+          <h3 style="color: #32db64;"> <strong>{{msg}} </strong></h3>
+        </ion-item>
+      </ion-list>
+
+      <button id="profile-button3" ion-button color="stable" block (click)="sendMessage()">
+        Envoyer
+      </button>
+    </form>
+  </ion-list>
+</ion-content>

@@ -1,31 +1,36 @@
-<ion-header> <ion-navbar>
-<button ion-button menuToggle>
-	<ion-icon name="menu"></ion-icon>
-</button>
-<ion-title> Absenses </ion-title> </ion-navbar> </ion-header>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> Absenses </ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content padding id="page5">
-<form  #searchForm="ngForm">
-	<ion-grid> <ion-row> <ion-col col-8>
-	<ion-input type="text" [(ngModel)]="searchText" name="searchT"
-		placeholder="nom et/ou le prenom"></ion-input> </ion-col> <ion-col col-4>
-	<button ion-fab mini color="Primary" (click)="search()">GO</button>
-	</ion-col> </ion-row> </ion-grid>
+  <form #searchForm="ngForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-8>
+          <ion-input type="text" [(ngModel)]="searchText" name="searchT" placeholder="nom et/ou le prenom"></ion-input>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-fab mini color="Primary" (click)="search()">GO</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 
-</form>
-
-<button ion-button color="danger" *ngIf="error">{{error}}</button>
-<ion-list>
-  <ion-item (click)="chooseUser(aUser)" *ngFor="let aUser of users">
-    <ion-avatar item-start>
-    <ion-thumbnail item-start>
-      <img src="{{url}}/assets/images/user/{{aUser.pic}}" alt="" />
-    </ion-thumbnail>
-    </ion-avatar>
-    <h2>{{aUser.firstName +'	'+aUser.lastName}}</h2>
-    <p>{{aUser.userName}}</p>
-     <ion-icon clear item-end name="arrow-dropright-circle" ></ion-icon> 
-  </ion-item>
-  
-</ion-list>
-
- </ion-content>
+  <button ion-button color="danger" *ngIf="error">{{error}}</button>
+  <ion-list>
+    <ion-item (click)="chooseUser(aUser)" *ngFor="let aUser of users">
+      <ion-avatar item-start>
+        <ion-thumbnail item-start>
+          <img src="{{url}}/assets/images/user/{{aUser.pic}}" alt="" />
+        </ion-thumbnail>
+      </ion-avatar>
+      <h2>{{aUser.firstName +'	'+aUser.lastName}}</h2>
+      <p>{{aUser.userName}}</p>
+      <ion-icon clear item-end name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

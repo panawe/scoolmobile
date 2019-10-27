@@ -1,11 +1,12 @@
-import {Constants} from '../../app/app.constants';
-import {SDMessage} from '../../app/models/sdMessage';
-import {User} from '../../app/models/user';
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {ContenuMessagePage} from '../contenu-message/contenu-message';
-import {Cookie} from 'ng2-cookies';
-import {BaseService} from '../../app/services/base.service';
+import { Constants } from '../../app/app.constants';
+import { SDMessage } from '../../app/models/sdMessage';
+import { User } from '../../app/models/user';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { ContenuMessagePage } from '../contenu-message/contenu-message';
+import { Cookie } from 'ng2-cookies';
+import { BaseService } from '../../app/services/base.service';
+import { NewMessagePage } from '../contenu-message/new-message';
 
 @Component({
   selector: 'page-messages',
@@ -17,7 +18,7 @@ export class MessagesPage {
   sentMsgs: SDMessage[];
   receivedMsgs: SDMessage[];
   msgCounts: number[];
-  msgType: number=1;
+  msgType: number = 1;
   user: User = JSON.parse(Cookie.get('loggedInUser'));
   url: string = Constants.webServer;
   constructor(public navCtrl: NavController, private baseService: BaseService) {
@@ -28,9 +29,9 @@ export class MessagesPage {
       message.status = 1;
       this.msgCounts[this.msgType - 1]--;
       this.baseService.markSDMessageAsRead(message)
-        .subscribe((data: string) => {console.log(data)},
-        error => console.log(error),
-        () => console.log('Mark Message as Read Complete'));
+        .subscribe((data: string) => { console.log(data) },
+          error => console.log(error),
+          () => console.log('Mark Message as Read Complete'));
     }
 
     this.navCtrl.push(ContenuMessagePage, {
@@ -42,37 +43,37 @@ export class MessagesPage {
     //const user: User = JSON.parse(Cookie.get('user'));
     this.baseService.getUserSDMessages(this.user.id, 3650, 1)
       .subscribe((data: SDMessage[]) => this.alerts = data,
-      error => console.log(error),
-      () => console.log('Get All Alerts Complete'));
+        error => console.log(error),
+        () => console.log('Get All Alerts Complete'));
 
     this.baseService.getUserSDMessages(this.user.id, 3650, 2)
       .subscribe((data: SDMessage[]) => this.receivedMsgs = data,
-      error => console.log(error),
-      () => console.log('Get All User SD Messages Complete'));
+        error => console.log(error),
+        () => console.log('Get All User SD Messages Complete'));
 
     this.baseService.getSentSDMessages(this.user.id, 3650)
       .subscribe((data: SDMessage[]) => this.sentMsgs = data,
-      error => console.log(error),
-      () => console.log('Get All Sent Messages Complete'));
+        error => console.log(error),
+        () => console.log('Get All Sent Messages Complete'));
 
     this.baseService.countSDMessagesByType(this.user.id, 3650)
       .subscribe((data: number[]) => {
         this.msgCounts = data;
+        console.log(this.msgCounts);
       },
-      error => console.log(error),
-      () => console.log('Get All User SD Messages Complete'));
+        error => console.log(error),
+        () => console.log('Get All User SD Messages Complete'));
   }
 
   deleteMessage(message: SDMessage) {
-    message.status = 2;
     this.msgCounts[this.msgType - 1]--;
-    this.baseService.markSDMessageAsRead(message)
+    this.baseService.deleteSDMessage(message)
       .subscribe((data: string) => {
         console.log(data);
         this.updateList(message);
       },
-      error => console.log(error),
-      () => console.log('Mark Message as Read Complete'));
+        error => console.log(error),
+        () => console.log('Mark Message as Read Complete'));
   }
 
   updateList(message: SDMessage) {
@@ -84,14 +85,22 @@ export class MessagesPage {
     } else if (this.msgType == 2) {
       this.receivedMsgs.splice(this.receivedMsgs.indexOf(message), 1);
       var onTheFly1: SDMessage[] = [];
-      onTheFly.push(...this.receivedMsgs);
+      onTheFly1.push(...this.receivedMsgs);
       this.receivedMsgs = onTheFly1;
     } else if (this.msgType == 3) {
       this.sentMsgs.splice(this.sentMsgs.indexOf(message), 1);
       var onTheFly2: SDMessage[] = [];
-      onTheFly.push(...this.sentMsgs);
+      onTheFly2.push(...this.sentMsgs);
       this.sentMsgs = onTheFly2;
     }
+  }
+
+  newMessage() {
+    let sdm: SDMessage = new SDMessage();
+    sdm.sender = this.user;
+    this.navCtrl.push(NewMessagePage, {
+      message: sdm
+    });
   }
 
   findSelectedIndex(): number {
@@ -125,18 +134,18 @@ export class MessagesPage {
       if (this.msgType == 1) {
         this.baseService.getUserSDMessages(this.user.id, 3650, 1)
           .subscribe((data: SDMessage[]) => this.alerts = data,
-          error => console.log(error),
-          () => console.log('Get All Alerts Complete'));
+            error => console.log(error),
+            () => console.log('Get All Alerts Complete'));
       } else if (this.msgType == 2) {
         this.baseService.getUserSDMessages(this.user.id, 3650, 2)
           .subscribe((data: SDMessage[]) => this.receivedMsgs = data,
-          error => console.log(error),
-          () => console.log('Get All User SD Messages Complete'));
+            error => console.log(error),
+            () => console.log('Get All User SD Messages Complete'));
       } else if (this.msgType == 3) {
         this.baseService.getSentSDMessages(this.user.id, 3650)
           .subscribe((data: SDMessage[]) => this.sentMsgs = data,
-          error => console.log(error),
-          () => console.log('Get All Sent Messages Complete'));
+            error => console.log(error),
+            () => console.log('Get All Sent Messages Complete'));
       }
 
     }

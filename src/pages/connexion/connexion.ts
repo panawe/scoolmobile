@@ -46,6 +46,7 @@ export class ConnexionPage {
   }
   public login() {
     try {
+      console.log('Connecting to :'+Constants.apiServer);
       this.userService.login(this.user)
         .subscribe(result => {
           if (result == true) {

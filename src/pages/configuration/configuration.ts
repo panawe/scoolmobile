@@ -51,8 +51,17 @@ export class ConfigurationPage {
       this.storage.ready().then(() => {
         console.log("Save client=" + this.client.id);
         this.storage.set('cid', this.client.id);
+        for (var i = 0; i < this.clients.length; i++) {
+          const c: Client = this.clients[i];
+          console.log("checking client Id: " + c.id);
+          if (c.id == this.client.id) {
+            this.client = c;
+            console.log("client matched cid=" + this.client.id);
+            break;
+          }
+        }
         Constants.apiServer = this.client.restUrl;
-        Constants.webServer=this.client.webUrl;
+        Constants.webServer = this.client.webUrl;
         this.storage.set('url', this.client.restUrl);
         this.storage.set('weburl', this.client.webUrl);
         console.log("Save client REST URL = " + this.client.restUrl);

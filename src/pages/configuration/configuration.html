@@ -16,14 +16,13 @@
         <h2 style="color: #32db64;"> <strong>Mon Etablissement </strong></h2>
       </ion-item>
       <ion-item id="profile-img" *ngIf="client.id>0">
-        <h2> {{client.name}}</h2>
+        <h1> {{client.name}}</h1>
+        <h6><a href="{{client.webUrl}}"> {{client.webUrl}} </a></h6>
         <img src="{{client.webUrl}}/assets/images/logo.png" alt="" />
       </ion-item>
-
-
       <ion-item *ngIf="clients && clients.length>0">
         <ion-label>Choisir l'etablissement</ion-label>
-        <ion-select [(ngModel)]="client.id" name="client">
+        <ion-select [(ngModel)]="client.id" name="client" (ionChange)="save()">
           <ion-option *ngFor="let client of clients" value="{{client.id}}">
             <ion-avatar item-start>
               <ion-thumbnail item-start>
@@ -35,10 +34,11 @@
       </ion-item>
     </ion-list>
   </form>
-
+<!--
   <button id="configuration-button6" ion-button color="positive" block (click)="save()">
     Sauvegarder
   </button>
+-->
   <ion-icon name="thumbs-down" color="danger" *ngIf="error" style="font-size:100px;"></ion-icon>
   <ion-icon name="thumbs-up" color="secondary" *ngIf="msg" style="font-size:100px;"></ion-icon>
 </ion-content>

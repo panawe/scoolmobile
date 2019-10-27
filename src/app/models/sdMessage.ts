@@ -1,4 +1,4 @@
-import {User} from './user';
+import { User } from './user';
 export class SDMessage {
   id: number;
   recipient: User;
@@ -6,8 +6,10 @@ export class SDMessage {
   body: string;
   subject: string;
   status: number;
-  msgType: number; 
+  msgType: number;
   createDate: Date;
   modDate: Date;
-  shortMessage: string; 
+  shortMessage: string;
+  recipients: User[];
+  sendMail: boolean;
 }
