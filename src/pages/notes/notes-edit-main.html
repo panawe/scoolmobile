@@ -72,7 +72,23 @@
     <ion-radio value="1" ></ion-radio>
   </ion-item>
 </ion-list>
-  
+
+
+<ion-list radio-group [(ngModel)]="exam.course.sessionType" name ="sessionType">
+  <ion-list-header>
+    Type de session
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Normale</ion-label>
+    <ion-radio checked="true" value="0"  ></ion-radio>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Rattrapage</ion-label>
+    <ion-radio value="1" ></ion-radio>
+  </ion-item>
+</ion-list>
 	<button ion-button color="primary" (click)="save()">Sauvegarder</button>  
 
 </form>

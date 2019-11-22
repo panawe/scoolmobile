@@ -11,6 +11,8 @@ import {NotesAdminPage} from "../notes/notes-admin";
 import {CoursPage} from "../payements/cours";
 import {PayementsAdminPage} from "../payements/payements-admin";
 import {Cookie} from 'ng2-cookies';
+import { CicoPage } from '../kiosk/cico';
+import { VisitorPage } from '../kiosk/visitor';
 
 @Component({
   selector: 'page-tab-menu',
@@ -22,6 +24,7 @@ export class TabMenuPage {
   tab2Root: any = PayementsPage;
   tab3Root: any = MessagesPage;
   tab4Root: any = AbsensesPage;
+  tab1Desc: string = 'Notes';
   tab2Desc: string = 'Payements';
   user: User = JSON.parse(Cookie.get('loggedInUser'));
   constructor(public navCtrl: NavController, private baseService: BaseService) {
@@ -36,7 +39,11 @@ export class TabMenuPage {
         this.tab2Root = CoursPage;
         this.tab2Desc = 'Cours';
         this.tab4Root = AbsensesAdminPage;
-
+      } else if (this.user.role == 6) {//Kiosk
+        this.tab1Root = CicoPage;
+        this.tab1Desc = 'Inscrit';
+        this.tab2Root = VisitorPage;
+        this.tab2Desc = 'Visiteur'; 
       }
     }
   }

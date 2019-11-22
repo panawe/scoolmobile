@@ -1,13 +1,14 @@
-import {Enrollment} from "../../app/models/enrollment";
-import {SchoolYear} from "../../app/models/schoolYear";
-import {Student} from "../../app/models/student";
-import {TuitionView} from '../../app/models/tuitionView';
-import {User} from "../../app/models/user";
-import {BaseService} from '../../app/services/base.service';
-import {StudentService} from "../../app/services/student.service";
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Cookie} from "ng2-cookies";
+import { Enrollment } from "../../app/models/enrollment";
+import { SchoolYear } from "../../app/models/schoolYear";
+import { Student } from "../../app/models/student";
+import { TuitionView } from '../../app/models/tuitionView';
+import { User } from "../../app/models/user";
+import { BaseService } from '../../app/services/base.service';
+import { StudentService } from "../../app/services/student.service";
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { Cookie } from "ng2-cookies";
+import { PayementsStudentViewPage } from "./payements-student-view";
 
 @Component({
   selector: 'page-payements-student-dtl',
@@ -29,7 +30,8 @@ export class PayementsStudentDtlPage {
     st.id = this.tuition.studentId;
     enr.student = st;
     enr.schoolYear = this.year;
-    this.baseService.getStudentTuitions(enr).subscribe((data: TuitionView[]) => {this.tuitions = data;},
+    console.log('User role='+this.user.role);
+    this.baseService.getStudentTuitions(enr).subscribe((data: TuitionView[]) => { this.tuitions = data; },
       error => console.log(error),
       () => console.log('Get tuitions'));
   }
@@ -55,5 +57,12 @@ export class PayementsStudentDtlPage {
       },
         error => console.log(error),
         () => console.log('Save Tuition'));
+  }
+
+  goToPaymentDtl(data: TuitionView) {
+    this.navCtrl.push(PayementsStudentViewPage, {
+      tuitionDtl: data,
+      year: this.year
+    });
   }
 }

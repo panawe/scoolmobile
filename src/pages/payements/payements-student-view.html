@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Details Payement
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page3">
+  <ion-item text-wrap>
+    <h2>{{tuition.name}}</h2>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let payment of payments" text-wrap>
+      <p>
+        <ion-badge color="primary">{{payment.paymentDate
+| date:'dd/MM/yy' }}</ion-badge>
+      </p>
+      <p>Paye: <ion-badge color="secondary">{{payment.amount|number :'1.0-2'}}</ion-badge>
+        <input *ngIf="user.role==1||user.role==5" pInputText name="newpay" placeholder="" [(ngModel)]="payment.amount" size="3" />
+      </p>
+      <p>
+        Remise: <ion-badge color="secondary">{{payment.rebate|number :'1.0-2'}}</ion-badge>
+        <input *ngIf="user.role==1||user.role==5" pInputText name="newRebate" placeholder="" [(ngModel)]="payment.rebate" size="3" />
+      </p>
+      <p>
+        Reference: {{payment.reference}}
+        <br/>
+        <input *ngIf="user.role==1||user.role==5"  pInputText name="reference" placeholder="" [(ngModel)]="payment.reference" size="10" />
+      </p>
+      <p>
+      <font color="red"> Caissier(e): {{payment.caissier?payment.caissier.name:''}}</font>
+      </p>
+      <button *ngIf="user.role==1||user.role==5" ion-fab mini clear item-end color="{{color}}" (click)="savePayment(payment)">
+        <ion-icon name="{{icon}}"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

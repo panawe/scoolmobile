@@ -14,4 +14,5 @@ export class TuitionView {
   balance: number;
   rebate: number;
   modBy: number;
+  reference: string;
 }

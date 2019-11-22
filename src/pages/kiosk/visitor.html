@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Kiosk Visiteur
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page7">
+
+ 
+  <form id="profile-form2">
+	<img   src="{{url}}/assets/images/user/{{user.pic}}" alt="" />
+    <ion-list id="profile-list3">
+      <ion-item id="profile-input3">
+        <ion-label>
+          Nom
+        </ion-label>
+        <ion-input type="text" placeholder="" name="lastName" [(ngModel)]="user.lastName"> </ion-input>
+      </ion-item>
+      <ion-item id="profile-input7">
+        <ion-label>
+          Prenom
+        </ion-label>
+        <ion-input type="text" placeholder=""  name="firstName"[(ngModel)]="user.firstName"> </ion-input>
+      </ion-item>
+      <ion-item id="profile-input4">
+        <ion-label>
+          Email
+        </ion-label>
+        <ion-input type="email" placeholder=""  name="email" [(ngModel)]="user.email"> </ion-input>
+      </ion-item>
+      <ion-item id="profile-input5">
+        <ion-label>
+          Mot de passe
+        </ion-label>
+        <ion-input type="password" placeholder=""  name="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+      <ion-item id="profile-input6">
+        <ion-label>
+          Tel. Cell.
+        </ion-label>
+        <ion-input type="text" placeholder=""  name="cellPhone" [(ngModel)]="user.cellPhone"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button id="profile-button3" ion-button color="stable" block (click) ="saveUser()">
+      Sauvegarder
+    </button>
+    <button ion-button color="danger" clear *ngIf="error">{{error}}</button>
+    <button ion-button color="secondary" clear *ngIf="msg">{{msg}}</button>
+  </form>
+</ion-content>

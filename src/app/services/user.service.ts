@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
-import { StudentView } from '../models/studentView';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
@@ -74,12 +73,12 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  public getStudentUsersByParent = (parentId: number): Observable<StudentView[]> => {
-    let toAdd = JSON.stringify(parentId);
-    let actionUrl = Constants.apiServer + '/service/user/getStudentsByParentId';
+  public cico = (matricule: string): Observable<User> => {
+    let toAdd = JSON.stringify(matricule);
+    let actionUrl = Constants.apiServer + '/service/user/cico';
     return this.http.post(actionUrl, toAdd, { headers: this.headers })
       .map((response: Response) => {
-        return <User[]>response.json();
+        return <User>response.json();
       })
       .catch(this.handleError);
   }

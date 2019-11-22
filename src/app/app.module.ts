@@ -41,6 +41,9 @@ import { PayementsAdminDtlPage } from "../pages/payements/payements-admin-dtl";
 import { PayementsDtlPage } from '../pages/payements/payements-dtl';
 import { NotesDtlPage } from '../pages/notes/notes-dtl';
 import { AbsensesDtlPage } from '../pages/absenses/absenses-dtl';
+import { PayementsStudentViewPage } from "../pages/payements/payements-student-view";
+import { VisitorPage } from '../pages/kiosk/visitor';
+import { CicoPage } from '../pages/kiosk/cico';
 @NgModule({
   declarations: [
     MyApp,
@@ -65,8 +68,8 @@ import { AbsensesDtlPage } from '../pages/absenses/absenses-dtl';
     MatierePage,StudentsPage,
     ContenuMessagePage,
     ConfigurationPage,
-    AbsensesDetailsPage,
-    PayementsAdminDtlPage,
+    AbsensesDetailsPage,VisitorPage,CicoPage,
+    PayementsAdminDtlPage,PayementsStudentViewPage,
     PayementsDtlPage, NotesDtlPage,AbsensesDtlPage
   ],
   imports: [
@@ -100,8 +103,8 @@ import { AbsensesDtlPage } from '../pages/absenses/absenses-dtl';
     MatierePage,StudentsPage,
     ContenuMessagePage,
     ConfigurationPage,
-    AbsensesDetailsPage,
-    PayementsAdminDtlPage,
+    AbsensesDetailsPage,VisitorPage,CicoPage,
+    PayementsAdminDtlPage,PayementsStudentViewPage,
     PayementsDtlPage, NotesDtlPage, AbsensesDtlPage
   ],
   providers: [

@@ -19,6 +19,7 @@ import { TimePeriod } from '../models/timePeriod';
 import { TuitionView } from "../models/tuitionView";
 import { Client } from '../models/client';
 import { YearData } from '../models/yearData';
+import { Payment } from '../models/payment';
 
 @Injectable()
 export class BaseService {
@@ -195,7 +196,7 @@ export class BaseService {
       .catch(this.handleError);
   }
 
-    public sendSDMessage = (param: SDMessage): Observable<string> => {
+  public sendSDMessage = (param: SDMessage): Observable<string> => {
     let actionUrl = Constants.apiServer + '/service/base/sendSDMessage';
     let toAdd = JSON.stringify(param);
     return this.http.post(actionUrl, toAdd, { headers: this.headers })
@@ -305,6 +306,18 @@ export class BaseService {
       .map((response: Response) => {
         if (response)
           return <TuitionView[]>response.json();
+        else
+          return null;
+      })
+      .catch(this.handleError);
+  }
+
+  public getStudentPayments = (studentTuitionId: number): Observable<Payment[]> => {
+    let actionUrl = Constants.apiServer + '/service/student/getStudentPayments/' + studentTuitionId;
+    return this.http.get(actionUrl)
+      .map((response: Response) => {
+        if (response)
+          return <Payment[]>response.json();
         else
           return null;
       })
