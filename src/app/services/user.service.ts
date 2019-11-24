@@ -4,6 +4,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { Cico } from '../models/cico';
 
 @Injectable()
 export class UserService {
@@ -73,8 +74,8 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  public cico = (matricule: string): Observable<User> => {
-    let toAdd = JSON.stringify(matricule);
+  public cico = (cico: Cico): Observable<User> => {
+    let toAdd = JSON.stringify(cico);
     let actionUrl = Constants.apiServer + '/service/user/cico';
     return this.http.post(actionUrl, toAdd, { headers: this.headers })
       .map((response: Response) => {

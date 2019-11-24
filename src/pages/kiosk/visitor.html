@@ -9,46 +9,71 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page7">
-
- 
   <form id="profile-form2">
-	<img   src="{{url}}/assets/images/user/{{user.pic}}" alt="" />
     <ion-list id="profile-list3">
+
       <ion-item id="profile-input3">
         <ion-label>
-          Nom
+          Nom & Prenom <font color="red">*</font>
         </ion-label>
-        <ion-input type="text" placeholder="" name="lastName" [(ngModel)]="user.lastName"> </ion-input>
+        <ion-input type="text" placeholder="" name="name" [(ngModel)]="cico.name"> </ion-input>
       </ion-item>
-      <ion-item id="profile-input7">
-        <ion-label>
-          Prenom
-        </ion-label>
-        <ion-input type="text" placeholder=""  name="firstName"[(ngModel)]="user.firstName"> </ion-input>
-      </ion-item>
-      <ion-item id="profile-input4">
-        <ion-label>
-          Email
-        </ion-label>
-        <ion-input type="email" placeholder=""  name="email" [(ngModel)]="user.email"> </ion-input>
-      </ion-item>
-      <ion-item id="profile-input5">
-        <ion-label>
-          Mot de passe
-        </ion-label>
-        <ion-input type="password" placeholder=""  name="password" [(ngModel)]="user.password"></ion-input>
-      </ion-item>
+
       <ion-item id="profile-input6">
         <ion-label>
-          Tel. Cell.
+          Tel.
         </ion-label>
-        <ion-input type="text" placeholder=""  name="cellPhone" [(ngModel)]="user.cellPhone"></ion-input>
+        <ion-input type="text" placeholder="" name="phone" [(ngModel)]="cico.phone"></ion-input>
       </ion-item>
+
+      <ion-item id="profile-input7">
+        <ion-label>
+          Raison <font color="red">*</font>
+        </ion-label>
+        <ion-input type="text" placeholder="" name="raison" [(ngModel)]="cico.reason"> </ion-input>
+      </ion-item>
+
+      <ion-item id="profile-input4">
+        <ion-label>
+          Personne visitee <font color="red">*</font>
+        </ion-label>
+        <ion-input type="text" placeholder="" name="visitee" [(ngModel)]="cico.visitee"> </ion-input>
+      </ion-item>
+
+      <ion-item id="profile-input4">
+        <ion-label>
+          Badge <font color="red">*</font>
+        </ion-label>
+        <ion-input type="text" placeholder="" name="matricule" [(ngModel)]="cico.matricule"> </ion-input>
+      </ion-item>
+
     </ion-list>
-    <button id="profile-button3" ion-button color="stable" block (click) ="saveUser()">
-      Sauvegarder
-    </button>
-    <button ion-button color="danger" clear *ngIf="error">{{error}}</button>
-    <button ion-button color="secondary" clear *ngIf="msg">{{msg}}</button>
+    <button id="profile-button3" ion-button color="stable" block (click)="doCico()">
+      Enregistrer
+    </button> 
+    <ion-card>
+      <ion-card-header>
+         <button ion-button color="danger" full *ngIf="error">
+          <strong>{{error}}</strong>
+        </button>
+        <button ion-button color="danger" full *ngIf="aUser.cicoStatus==0">
+          <strong>{{msg}}</strong>
+        </button>
+        <button ion-button color="secondary" full *ngIf="aUser.cicoStatus===1">
+          <strong>{{msg}}</strong>
+        </button>
+        <button ion-button color="primary" full *ngIf="aUser.cicoStatus===2">
+          <strong>{{msg}}</strong>
+        </button>
+        <button ion-button color="dark" full *ngIf="aUser.cicoStatus===3">
+          <strong>{{msg}}</strong>
+        </button>
+        <button ion-button color="light" full *ngIf="aUser.cicoStatus===4">
+          <strong>{{msg}}</strong>
+        </button>
+      </ion-card-header>
+      <ion-card-content back> 
+      </ion-card-content>
+    </ion-card>
   </form>
 </ion-content>

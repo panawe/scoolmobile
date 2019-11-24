@@ -16,25 +16,28 @@
         <ion-label>
           Matricule
         </ion-label>
-        <ion-input type="text" placeholder="" name="matricule" [(ngModel)]="matricule"> </ion-input>
+        <ion-input type="text" placeholder="" name="matricule" [(ngModel)]="cico.matricule"> </ion-input>
       </ion-item>
     </ion-list>
-    <button id="profile-button3" ion-button color="stable" block (click)="cico()">
-      Connecter
+    <button id="profile-button3" ion-button color="stable" block (click)="doCico()">
+      Enregistrer
     </button>
     <ion-card>
       <ion-card-header>
         <button ion-button color="danger" full  *ngIf="aUser.cicoStatus==0">
-          <h1><strong>{{msg}}</strong></h1>
+           <strong>{{msg}}</strong> 
         </button>
         <button ion-button color="secondary" full  *ngIf="aUser.cicoStatus===1">
-          <h1><strong>{{msg}}</strong></h1>
+           <strong>{{msg}}</strong> 
         </button>
         <button ion-button color="primary" full  *ngIf="aUser.cicoStatus===2">
-          <h1><strong>{{msg}}</strong></h1>
+          <strong>{{msg}}</strong> 
         </button>
         <button ion-button color="dark" full  *ngIf="aUser.cicoStatus===3">
-          <h1><strong>{{msg}}</strong></h1>
+           <strong>{{msg}}</strong> 
+        </button>
+        <button ion-button color="light" full  *ngIf="aUser.cicoStatus===4">
+           <strong>{{msg}}</strong> 
         </button>
       </ion-card-header>
       <ion-card-content back>
