@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { UserService } from '../../app/services/user.service';
-import { NativeAudio } from '@ionic-native/native-audio';
 import { Cico } from '../../app/models/cico';
 
 @Component({
@@ -17,9 +16,11 @@ export class VisitorPage {
   cico: Cico = new Cico();
   user: User;
   error: string;
+  failed = new Audio();
+  success = new Audio();
   aUser: User = new User();
   constructor(public navCtrl: NavController,
-    private nativeAudio: NativeAudio,
+    //private nativeAudio: NativeAudio,
     public platform: Platform,
     private userService: UserService) {
     this.user = JSON.parse(Cookie.get('loggedInUser'));
@@ -31,22 +32,8 @@ export class VisitorPage {
         error => console.log(error),
         () => console.log('Get user complete'));
 
-    this.platform.ready().then(() => {
-      console.log("platform ready");
-
-      this.nativeAudio.preloadComplex('failed', 'assets/audio/failed.mp3', 1, 1, 0).then(function () {
-        console.log("audio loaded!");
-      }, function (err) {
-        console.log("audio failed: " + err);
-      });
-
-      this.nativeAudio.preloadComplex('success', 'assets/audio/success.mp3', 1, 1, 0).then(function () {
-        console.log("audio loaded!");
-      }, function (err) {
-        console.log("audio failed: " + err);
-      });
-
-    });
+    this.failed.src = "assets/audio/failure.mp3";
+    this.success.src = "assets/audio/success.mp3";
 
   }
 
@@ -79,7 +66,7 @@ export class VisitorPage {
     this.aUser = new User();
     this.cico.ci = new Date();
 
-    if (this.checkRequiredFields())
+    if (this.checkRequiredFields()) {
       try {
         this.userService.cico(this.cico)
           .subscribe(result => {
@@ -104,39 +91,27 @@ export class VisitorPage {
       catch (e) {
         this.msg = Constants.ERROR_OCCURRED;
       }
+    } else {
+      this.failed.play();
+    }
   }
   setMsg(aUser: User) {
 
     if (aUser.cicoStatus === 0) {//not found
       this.msg = 'Numero de badge invalide';
-      this.nativeAudio.play('failed').then(function () {
-        console.log("playing audio!");
-      }, function (err) {
-        console.log("error playing audio: " + err);
-      });
+      this.failed.play();
     } else if (aUser.cicoStatus === 1) {
       this.msg = "L'heure de " + aUser.name + " enregistree avec succes ";
-      this.nativeAudio.play('success').then(function () {
-        console.log("playing audio!");
-      }, function (err) {
-        console.log("error playing audio: " + err);
-      });
+      this.success.play();
     } else if (aUser.cicoStatus === 2) {
       this.msg = 'Numero de badge desactive';
-      this.nativeAudio.play('failed').then(function () {
-        console.log("playing audio!");
-      }, function (err) {
-        console.log("error playing audio: " + err);
-      });
+      this.failed.play();
     } else if (aUser.cicoStatus === 3) {
       this.msg = aUser.name + ' doit aller voir la tresorerie';
-      this.nativeAudio.play('failed').then(function () {
-        console.log("playing audio!");
-      }, function (err) {
-        console.log("error playing audio: " + err);
-      });
+      this.failed.play();
     } else if (aUser.cicoStatus === 4) {
       this.msg = aUser.name + " s'est deja enregistre";
+      this.failed.play();
     }
   }
 }

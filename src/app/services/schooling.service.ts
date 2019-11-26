@@ -29,7 +29,7 @@ export class SchoolingService {
     this.actionUrl = Constants.apiServer + '/service/schooling/student/getByUser/' + userId;
     
     return this.http.get(this.actionUrl)
-      .map((response: Response) => <Schooling[]>response.json())
+      .map((response: Response) => <SchoolingView[]>response.json())
       .catch(this.handleError);
   }
   
@@ -37,7 +37,7 @@ export class SchoolingService {
     this.actionUrl = Constants.apiServer + '/service/schooling/student/getByUser/' + userId + '/' + yearId;
     
     return this.http.get(this.actionUrl)
-      .map((response: Response) => <Schooling[]>response.json())
+      .map((response: Response) => <SchoolingView[]>response.json())
       .catch(this.handleError);
   }
   

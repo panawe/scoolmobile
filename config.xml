@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.softenza.scoolday" version="2.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.softenza.scoolday" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ScoolDay</name>
     <description>Gestion complete des ecoles.</description>
     <author email="softenzainc@gmail.com" href="http://ww.softenza.com/">Softenza Inc.</author>
@@ -99,7 +99,7 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
     <engine name="android" spec="8.0.0" />
     <engine name="ios" spec="5.0.1" />
-    <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
 </widget>

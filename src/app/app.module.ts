@@ -44,7 +44,7 @@ import { AbsensesDtlPage } from '../pages/absenses/absenses-dtl';
 import { PayementsStudentViewPage } from "../pages/payements/payements-student-view";
 import { VisitorPage } from '../pages/kiosk/visitor';
 import { CicoPage } from '../pages/kiosk/cico';
-import { NativeAudio } from '@ionic-native/native-audio';
+//import { NativeAudio } from '@ionic-native/native-audio';
 @NgModule({
   declarations: [
     MyApp,
@@ -118,7 +118,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
     StudentService,
     GlobalEventsManager,
     SchoolingService,
-    NativeAudio,
+    //NativeAudio,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
