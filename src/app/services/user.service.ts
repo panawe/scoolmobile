@@ -33,7 +33,12 @@ export class UserService {
       .catch(this.handleError);
   }
 
-
+  public getCicoCleanupTime = (): Observable<number> => {
+    this.actionUrl = Constants.apiServer + '/service/cico/getCicoCleanupTime';
+    return this.http.get(this.actionUrl)
+      .map((response: Response) => <number>response.json())
+      .catch(this.handleError);
+  }
   public search = (searchText: string): Observable<User[]> => {
     let toAdd = JSON.stringify(searchText);
     let actionUrl = Constants.apiServer + '/service/user/findMembers';

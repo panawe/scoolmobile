@@ -19,6 +19,7 @@ export class VisitorPage {
   failed = new Audio();
   success = new Audio();
   aUser: User = new User();
+  cicoCleanupTime = 5;
   constructor(public navCtrl: NavController,
     //private nativeAudio: NativeAudio,
     public platform: Platform,
@@ -31,6 +32,14 @@ export class VisitorPage {
       },
         error => console.log(error),
         () => console.log('Get user complete'));
+
+    this.userService.getCicoCleanupTime()
+      .subscribe((data: number) => {
+        console.log('Cico cleanup =' + data);
+        this.cicoCleanupTime = data
+      },
+        error => console.log(error),
+        () => console.log('Get cicoCleanupTime'));
 
     this.failed.src = "assets/audio/failure.mp3";
     this.success.src = "assets/audio/success.mp3";
@@ -83,7 +92,8 @@ export class VisitorPage {
                 this.cico.reason = null;
                 this.cico.visitee = null;
                 this.cico.matricule = null;
-              }, 3000);
+                document.getElementById('name').focus(); 
+              }, this.cicoCleanupTime * 1000);
 
             }
           })
