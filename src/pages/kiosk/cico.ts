@@ -94,6 +94,12 @@ export class CicoPage {
     } else if (aUser.cicoStatus === 5) {
       this.msg = this.getSex(aUser) + ' ' + aUser.name + ",  aurevoir !";
       this.failed.play();
+    } else if (aUser.cicoStatus === 6) {
+      this.msg = 'Utilisez le kiosk visiteur pour enregistrer les visiteurs!';
+      this.failed.play();
+    } else if (aUser.cicoStatus === 7) {
+      this.msg = 'Veillez utiliser un badge visiteur!';
+      this.failed.play();
     }
   }
 

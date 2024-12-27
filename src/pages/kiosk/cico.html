@@ -24,7 +24,7 @@
     </button>
     <ion-card>
       <ion-card-header>
-        <button ion-button color="danger" full  *ngIf="aUser.cicoStatus==0">
+        <button ion-button color="danger" full  *ngIf="aUser.cicoStatus===0||aUser.cicoStatus===6||aUser.cicoStatus===7">
            <strong>{{msg}}</strong> 
         </button>
         <button ion-button color="secondary" full  *ngIf="aUser.cicoStatus===1">

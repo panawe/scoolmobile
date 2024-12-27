@@ -122,6 +122,12 @@ export class VisitorPage {
     } else if (aUser.cicoStatus === 4) {
       this.msg = aUser.name + " s'est deja enregistre";
       this.failed.play();
+    } else if (aUser.cicoStatus === 6) {
+      this.msg = 'Utilisez le kiosk visiteur pour enregistrer les visiteurs!';
+      this.failed.play();
+    } else if (aUser.cicoStatus === 7) {
+      this.msg = 'Veillez utiliser un badge visiteur!';
+      this.failed.play();
     }
   }
 }
